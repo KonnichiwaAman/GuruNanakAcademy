@@ -5,7 +5,7 @@ A modern, responsive, and accessible school website built with Next.js 14, TypeS
 ![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38B2AC?style=flat-square&logo=tailwind-css)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
 
 ## 🏫 About
 
@@ -239,7 +239,11 @@ NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is proprietary and confidential. All rights reserved by KonnichiwaAman.
+
+**NO LICENSE IS GRANTED** to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of this software without explicit written permission from the copyright holder.
+
+See the [LICENSE](LICENSE) file for full details.
 
 ## 📞 Contact
 
