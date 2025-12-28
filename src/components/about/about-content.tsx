@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { Quote, Sparkles, BookOpen } from 'lucide-react';
 import { SCHOOL_INFO } from '@/lib/constants';
-import { cn } from '@/lib/utils';
 
 export function AboutContent() {
     return (

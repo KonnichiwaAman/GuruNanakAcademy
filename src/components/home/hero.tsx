@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, useMotionValue, useTransform, useSpring, useInView } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useInView } from 'framer-motion';
 import { ArrowRight, CreditCard, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { SCHOOL_INFO } from '@/lib/constants';

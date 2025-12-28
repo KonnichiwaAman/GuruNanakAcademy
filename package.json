@@ -17,6 +17,9 @@
     "prepare": "husky",
     "postbuild": "next-sitemap"
   },
+  "overrides": {
+    "glob": "^10.4.5"
+  },
   "dependencies": {
     "@hookform/resolvers": "^3.3.0",
     "@mdx-js/loader": "^3.0.0",
@@ -60,7 +63,7 @@
     "@typescript-eslint/parser": "^7.0.0",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
-    "eslint-config-next": "^16.0.10",
+    "eslint-config-next": "^14.2.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.34.0",
     "eslint-plugin-react-hooks": "^4.6.0",

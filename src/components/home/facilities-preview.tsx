@@ -110,7 +110,7 @@ export function FacilitiesPreview() {
           animate={isInView ? 'visible' : 'hidden'}
           className="grid gap-4 md:gap-8 md:grid-cols-2 lg:grid-cols-3"
         >
-          {FACILITIES.map((facility, index) => {
+          {FACILITIES.map((facility) => {
             const Icon = facility.icon;
             return (
               <motion.div

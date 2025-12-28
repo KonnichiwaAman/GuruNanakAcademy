@@ -107,7 +107,7 @@ export function LabCards() {
           animate={isInView ? 'visible' : 'hidden'}
           className="grid gap-4 md:gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {LABS.map((lab, index) => {
+          {LABS.map((lab) => {
             const Icon = lab.icon;
             return (
               <motion.div key={lab.id} variants={itemVariants}>

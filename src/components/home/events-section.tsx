@@ -114,7 +114,7 @@ export function EventsSection() {
           animate={isInView ? 'visible' : 'hidden'}
           className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
         >
-          {featuredEvents.map((event, index) => (
+          {featuredEvents.map((event) => (
             <motion.article 
               key={event.id} 
               variants={itemVariants}
