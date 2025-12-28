@@ -17,6 +17,9 @@
     "prepare": "husky",
     "postbuild": "next-sitemap"
   },
+  "overrides": {
+    "glob": "^10.4.5"
+  },
   "dependencies": {
     "@hookform/resolvers": "^3.3.0",
     "@mdx-js/loader": "^3.0.0",
