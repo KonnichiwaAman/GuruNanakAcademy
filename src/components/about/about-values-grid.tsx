@@ -1,47 +1,76 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
 import { Heart, Award, Sparkles, HandHeart, GraduationCap } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function AboutValuesGrid() {
+    const containerRef = useRef<HTMLElement>(null);
+    const headerRef = useRef<HTMLDivElement>(null);
+    const gridRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        // Header
+        gsap.from(headerRef.current?.children || [], {
+            y: 20,
+            opacity: 0,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: 'top 80%',
+            },
+        });
+
+        // Grid Items
+        if (gridRef.current) {
+            const items = Array.from(gridRef.current.children);
+            gsap.from(items, {
+                y: 30,
+                opacity: 0,
+                stagger: 0.15,
+                duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: gridRef.current,
+                    start: 'top 80%',
+                }
+            });
+        }
+    }, { scope: containerRef });
+
     return (
-        <section className="py-12 md:py-20 lg:py-28 bg-muted/30">
+        <section ref={containerRef} className="py-12 md:py-20 lg:py-28 bg-muted/30">
             <div className="container-custom">
                 {/* Section Header */}
-                <div className="mb-8 md:mb-16 text-center">
-                    <motion.span
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-sm font-medium uppercase tracking-wider text-muted-foreground"
+                <div ref={headerRef} className="mb-8 md:mb-16 text-center">
+                    <span
+                        className="block text-sm font-medium uppercase tracking-wider text-muted-foreground"
                     >
                         What We Stand For
-                    </motion.span>
-                    <motion.h2
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
+                    </span>
+                    <h2
                         className="mt-3 text-3xl font-bold text-foreground md:text-4xl lg:text-5xl"
                     >
                         Our Foundation
-                    </motion.h2>
+                    </h2>
                 </div>
 
                 {/* Bento Grid */}
-                <div className="grid gap-6 md:grid-cols-3 md:grid-rows-2">
+                <div ref={gridRef} className="grid gap-6 md:grid-cols-3 md:grid-rows-2">
                     {/* Featured Card - Core Values (Large) */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="group relative overflow-hidden rounded-2xl md:rounded-3xl bg-gradient-to-br from-primary to-primary/80 p-6 md:p-10 md:row-span-2 text-primary-foreground"
+                    <div
+                        className="group relative overflow-hidden rounded-2xl md:rounded-3xl bg-gradient-to-br from-primary to-primary/80 p-6 md:p-10 md:row-span-2 text-primary-foreground transition-transform duration-500 hover:scale-[1.02]"
                     >
                         <div className="relative z-10 flex h-full flex-col">
                             <div className="mb-auto">
-                                <div className="mb-4 md:mb-8 inline-flex h-12 w-12 md:h-16 md:w-16 items-center justify-center rounded-xl md:rounded-2xl bg-white/20">
+                                <div className="mb-4 md:mb-8 inline-flex h-12 w-12 md:h-16 md:w-16 items-center justify-center rounded-xl md:rounded-2xl bg-white/20 transition-transform duration-300 group-hover:rotate-12">
                                     <Heart className="h-6 w-6 md:h-8 md:w-8" />
                                 </div>
                                 <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 md:mb-5">Core Values</h3>
@@ -63,7 +92,7 @@ export function AboutValuesGrid() {
                         {/* Decorative circles */}
                         <div className="absolute -right-12 -top-12 h-48 w-48 rounded-full bg-white/10" />
                         <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-white/5" />
-                    </motion.div>
+                    </div>
 
                     {/* Standard Cards */}
                     {[
@@ -73,7 +102,6 @@ export function AboutValuesGrid() {
                             description: 'Students participate in Gurudwara visits for Shabad chanting and neighborhood social work, fostering sensitivity to their environment and human needs.',
                             bg: 'bg-emerald-100 dark:bg-emerald-900/30',
                             text: 'text-emerald-600 dark:text-emerald-400',
-                            delay: 0.1
                         },
                         {
                             title: 'CISCE Affiliated',
@@ -81,37 +109,28 @@ export function AboutValuesGrid() {
                             description: 'Affiliated to the Council for the Indian School Certificate Examinations (CISCE), New Delhi — a renowned board of education in India.',
                             bg: 'bg-blue-100 dark:bg-blue-900/30',
                             text: 'text-blue-600 dark:text-blue-400',
-                            delay: 0.2
                         }
                     ].map((card) => (
-                        <motion.div
+                        <div
                             key={card.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: card.delay }}
-                            className="group relative overflow-hidden rounded-3xl border border-border bg-card p-8 transition-all hover:shadow-lg"
+                            className="group relative overflow-hidden rounded-3xl border border-border bg-card p-8 transition-all hover:shadow-lg hover:-translate-y-1 duration-300"
                         >
-                            <div className={cn("mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl", card.bg, card.text)}>
+                            <div className={cn("mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110", card.bg, card.text)}>
                                 <card.icon className="h-7 w-7" />
                             </div>
                             <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{card.title}</h3>
                             <p className="text-muted-foreground leading-relaxed">
                                 {card.description}
                             </p>
-                        </motion.div>
+                        </div>
                     ))}
 
                     {/* Heritage Card - Wide */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
-                        className="group relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border border-amber-200/50 dark:border-amber-800/30 p-8 md:col-span-2"
+                    <div
+                        className="group relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border border-amber-200/50 dark:border-amber-800/30 p-8 md:col-span-2 transition-all hover:shadow-lg hover:-translate-y-1 duration-300"
                     >
                         <div className="flex flex-col md:flex-row md:items-center gap-6">
-                            <div className="inline-flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-amber-100 text-amber-600 dark:bg-amber-900/50 dark:text-amber-400">
+                            <div className="inline-flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-amber-100 text-amber-600 dark:bg-amber-900/50 dark:text-amber-400 transition-transform duration-300 group-hover:rotate-6">
                                 <GraduationCap className="h-8 w-8" />
                             </div>
                             <div>
@@ -121,7 +140,7 @@ export function AboutValuesGrid() {
                                 </p>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </div>
         </section>

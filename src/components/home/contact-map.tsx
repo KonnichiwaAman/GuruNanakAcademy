@@ -1,9 +1,14 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { SCHOOL_INFO } from '@/lib/constants';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Dynamically import Map component (client-side only)
 const MapComponent = dynamic(
@@ -19,42 +24,77 @@ const MapComponent = dynamic(
 );
 
 export function ContactMap() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<HTMLDivElement>(null);
+  const infoRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    // Header Animation
+    gsap.from('.header-element', {
+      y: 20,
+      opacity: 0,
+      stagger: 0.2,
+      duration: 0.8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top 80%',
+      },
+    });
+
+    // Map Reveal
+    gsap.from(mapRef.current, {
+      x: -30,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top 70%',
+      },
+    });
+
+    // Info Reveal
+    gsap.from(infoRef.current, {
+      x: 30,
+      opacity: 0,
+      duration: 1,
+      delay: 0.2,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top 70%',
+      },
+    });
+
+  }, { scope: containerRef });
+
   return (
-    <section className="section-padding bg-background" aria-labelledby="contact-heading">
+    <section ref={containerRef} className="section-padding bg-background" aria-labelledby="contact-heading">
       <div className="container-custom">
         {/* Section Header */}
         <div className="mb-12 text-center">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-sm font-medium uppercase tracking-wider text-muted-foreground"
+          <span
+            className="header-element block text-sm font-medium uppercase tracking-wider text-muted-foreground"
           >
             Get in Touch
-          </motion.span>
-          <motion.h2
+          </span>
+          <h2
             id="contact-heading"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="mt-2 text-heading-xl font-bold text-foreground md:text-display"
+            className="header-element mt-2 text-heading-xl font-bold text-foreground md:text-display"
           >
             Visit Our Campus
-          </motion.h2>
+          </h2>
         </div>
 
         {/* Content Grid */}
         <div className="grid gap-8 lg:grid-cols-5">
           {/* Map */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
+            ref={mapRef}
             className="lg:col-span-3 relative z-0"
           >
-            <div className="h-[400px] overflow-hidden rounded-2xl border border-border lg:h-[500px] relative z-0">
+            <div className="h-[400px] overflow-hidden rounded-2xl border border-border lg:h-[500px] relative z-0 transition-transform duration-500 hover:shadow-lg">
               <MapComponent
                 center={[SCHOOL_INFO.coordinates.lat, SCHOOL_INFO.coordinates.lng]}
                 zoom={15}
@@ -65,17 +105,14 @@ export function ContactMap() {
                 markerTitle={SCHOOL_INFO.name}
               />
             </div>
-          </motion.div>
+          </div>
 
           {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+          <div
+            ref={infoRef}
             className="lg:col-span-2"
           >
-            <div className="rounded-2xl border border-border bg-card p-8">
+            <div className="rounded-2xl border border-border bg-card p-8 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
               <h3 className="mb-6 text-xl font-semibold text-foreground">
                 Contact Information
               </h3>
@@ -83,7 +120,7 @@ export function ContactMap() {
               <div className="space-y-6">
                 {/* Location */}
                 <div className="flex gap-4">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 hover:scale-110">
                     <MapPin className="h-6 w-6" aria-hidden="true" />
                   </div>
                   <div>
@@ -105,7 +142,7 @@ export function ContactMap() {
 
                 {/* Phone */}
                 <div className="flex gap-4">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 hover:scale-110">
                     <Phone className="h-6 w-6" aria-hidden="true" />
                   </div>
                   <div>
@@ -126,7 +163,7 @@ export function ContactMap() {
 
                 {/* Email */}
                 <div className="flex gap-4">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 hover:scale-110">
                     <Mail className="h-6 w-6" aria-hidden="true" />
                   </div>
                   <div>
@@ -148,7 +185,7 @@ export function ContactMap() {
 
                 {/* Office Hours */}
                 <div className="flex gap-4">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-transform duration-300 hover:scale-110">
                     <Clock className="h-6 w-6" aria-hidden="true" />
                   </div>
                   <div>
@@ -162,7 +199,7 @@ export function ContactMap() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

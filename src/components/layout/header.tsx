@@ -3,17 +3,19 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, GraduationCap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { NAV_LINKS, SCHOOL_INFO } from '@/lib/constants';
 import { ThemeToggle } from './theme-toggle';
 import { Button } from '@/components/ui/button';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 export function Header() {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const pathname = usePathname();
+  const mobileMenuRef = React.useRef<HTMLDivElement>(null);
 
   // Handle scroll
   React.useEffect(() => {
@@ -41,6 +43,23 @@ export function Header() {
     return () => {
       document.body.style.overflow = '';
     };
+  }, [isMobileMenuOpen]);
+
+  useGSAP(() => {
+    if (isMobileMenuOpen) {
+      gsap.fromTo(mobileMenuRef.current,
+        { height: 0, opacity: 0 },
+        { height: 'auto', opacity: 1, duration: 0.3, ease: 'power2.out' }
+      );
+    } else {
+        // We can't easily animate exit here without AnimatePresence equivalent or keeping it mounted.
+        // For simplicity with conditionally rendered standard React, we just let it unmount or rely on CSS.
+        // But since we are rendering it conditionally `{isMobileMenuOpen && ...}`, we can't animate out easily with just GSAP inside useEffect without extra state.
+        // A common pattern is to keep it mounted and toggle class/styles, OR use a library.
+        // Here, we will just use a simple transition for opening.
+        // To fix exit animation properly without framer-motion's AnimatePresence, we'd need to delay unmount.
+        // For now, instantaneous close is acceptable or we can use CSS transition on a persistent element.
+    }
   }, [isMobileMenuOpen]);
 
   return (
@@ -121,54 +140,51 @@ export function Header() {
       </nav>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            id="mobile-menu"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden border-t border-border bg-background lg:hidden"
-          >
-            <div className="container-custom py-4">
-              <div className="flex flex-col gap-1">
-                {NAV_LINKS.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={cn(
-                      'rounded-lg px-4 py-3 text-base font-medium transition-colors',
-                      pathname === link.href
-                        ? 'bg-primary/10 text-primary'
-                        : 'text-foreground/70 hover:bg-accent hover:text-foreground'
-                    )}
-                    aria-current={pathname === link.href ? 'page' : undefined}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+      {isMobileMenuOpen && (
+        <div
+          ref={mobileMenuRef}
+          id="mobile-menu"
+          className="overflow-hidden border-t border-border bg-background lg:hidden"
+        >
+          <div className="container-custom py-4">
+            <div className="flex flex-col gap-1">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    'rounded-lg px-4 py-3 text-base font-medium transition-colors',
+                    pathname === link.href
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-foreground/70 hover:bg-accent hover:text-foreground'
+                  )}
+                  aria-current={pathname === link.href ? 'page' : undefined}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
 
-                {/* CTA Buttons in Mobile */}
-                <div className="mt-4 flex flex-col gap-2 border-t border-border pt-4">
-                  <Button asChild>
-                    <Link href="/admission/form">Apply for Admission</Link>
-                  </Button>
-                  <Button variant="outline" asChild>
-                    <Link
-                      href="https://payment.example.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Pay School Fee
-                    </Link>
-                  </Button>
-                </div>
+              {/* CTA Buttons in Mobile */}
+              <div className="mt-4 flex flex-col gap-2 border-t border-border pt-4">
+                <Button asChild>
+                  <Link href="/admission/form" onClick={() => setIsMobileMenuOpen(false)}>Apply for Admission</Link>
+                </Button>
+                <Button variant="outline" asChild>
+                  <Link
+                    href="https://payment.example.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Pay School Fee
+                  </Link>
+                </Button>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

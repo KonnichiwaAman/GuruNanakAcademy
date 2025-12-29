@@ -1,10 +1,15 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
 import { LEADERSHIP } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { Quote } from 'lucide-react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const LONG_MESSAGES = {
   Chairman: {
@@ -29,53 +34,75 @@ const LONG_MESSAGES = {
 };
 
 export function LeadershipSection() {
+  const containerRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    // Header Animation
+    gsap.from(headerRef.current?.children || [], {
+      y: 20,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 0.8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top 80%',
+      },
+    });
+
+    // List Animation
+    if (listRef.current) {
+        const items = Array.from(listRef.current.children);
+        items.forEach((item, index) => {
+            gsap.from(item, {
+                y: 40,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 85%',
+                }
+            });
+        });
+    }
+
+  }, { scope: containerRef });
+
   return (
-    <section className="section-padding bg-background" aria-labelledby="leadership-heading">
+    <section ref={containerRef} className="section-padding bg-background" aria-labelledby="leadership-heading">
       <div className="container-custom">
-        <div className="mb-12 text-center">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-sm font-medium uppercase tracking-wider text-muted-foreground"
+        <div ref={headerRef} className="mb-12 text-center">
+          <span
+            className="block text-sm font-medium uppercase tracking-wider text-muted-foreground"
           >
             Meet Our Leaders
-          </motion.span>
-          <motion.h2
+          </span>
+          <h2
             id="leadership-heading"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
             className="mt-2 text-heading-xl font-bold text-foreground md:text-display"
           >
             School Leadership
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
+          </h2>
+          <p
             className="mx-auto mt-4 max-w-2xl text-muted-foreground"
           >
             Visionaries guiding our institution towards excellence in education and character building.
-          </motion.p>
+          </p>
         </div>
 
-        <div className="flex flex-col gap-8">
+        <div ref={listRef} className="flex flex-col gap-8">
           {LEADERSHIP.map((leader, index) => {
             const longMessage = LONG_MESSAGES[leader.role as keyof typeof LONG_MESSAGES];
             const isReverse = index % 2 !== 0;
 
             return (
-              <motion.div
+              <div
                 key={leader.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
                 className={cn(
-                  "group relative overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-all hover:shadow-md"
+                  "group relative overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-all hover:shadow-md hover:-translate-y-1 duration-300"
                 )}
               >
                 <div className={cn(
@@ -83,12 +110,12 @@ export function LeadershipSection() {
                   isReverse ? "md:flex-row-reverse" : ""
                 )}>
                   {/* Image Container */}
-                  <div className="relative w-full md:w-2/5 aspect-[4/3] md:aspect-auto md:self-stretch bg-muted">
+                  <div className="relative w-full md:w-2/5 aspect-[4/3] md:aspect-auto md:self-stretch bg-muted overflow-hidden">
                     <Image
                       src={leader.image}
                       alt={leader.name}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, 40vw"
                     />
                   </div>
@@ -118,7 +145,7 @@ export function LeadershipSection() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>

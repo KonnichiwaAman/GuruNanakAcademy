@@ -1,6 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Step {
   step: number;
@@ -13,28 +18,56 @@ interface AdmissionStepsProps {
 }
 
 export function AdmissionSteps({ steps }: AdmissionStepsProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const stepsRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    // Header Animation
+    gsap.from('.header-element', {
+      y: 20,
+      opacity: 0,
+      stagger: 0.2,
+      duration: 0.8,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top 80%',
+      },
+    });
+
+    // Steps Animation
+    if (stepsRef.current) {
+      const stepElements = Array.from(stepsRef.current.children);
+      stepElements.forEach((step, index) => {
+        gsap.from(step, {
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: step,
+            start: 'top 85%',
+          },
+        });
+      });
+    }
+  }, { scope: containerRef });
+
   return (
-    <section className="section-padding bg-background" aria-labelledby="steps-heading">
+    <section ref={containerRef} className="section-padding bg-background" aria-labelledby="steps-heading">
       <div className="container-custom">
         <div className="mb-12 text-center">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-sm font-medium uppercase tracking-wider text-muted-foreground"
+          <span
+            className="header-element block text-sm font-medium uppercase tracking-wider text-muted-foreground"
           >
             Step by Step
-          </motion.span>
-          <motion.h2
+          </span>
+          <h2
             id="steps-heading"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="mt-2 text-heading-xl font-bold text-foreground md:text-display"
+            className="header-element mt-2 text-heading-xl font-bold text-foreground md:text-display"
           >
             Admission Process
-          </motion.h2>
+          </h2>
         </div>
 
         <div className="mx-auto max-w-4xl">
@@ -46,14 +79,10 @@ export function AdmissionSteps({ steps }: AdmissionStepsProps) {
             />
 
             {/* Steps */}
-            <div className="space-y-8 md:space-y-12">
+            <div ref={stepsRef} className="space-y-8 md:space-y-12">
               {steps.map((step, index) => (
-                <motion.div
+                <div
                   key={step.step}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
                   className={`relative flex items-start gap-6 md:gap-0 ${
                     index % 2 === 0
                       ? 'md:flex-row'
@@ -71,7 +100,7 @@ export function AdmissionSteps({ steps }: AdmissionStepsProps) {
                   {/* Content */}
                   <div className="flex-1 md:w-5/12">
                     <div
-                      className={`rounded-2xl border border-border bg-card p-6 shadow-soft ${
+                      className={`rounded-2xl border border-border bg-card p-6 shadow-soft transition-transform hover:scale-105 ${
                         index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'
                       }`}
                     >
@@ -94,7 +123,7 @@ export function AdmissionSteps({ steps }: AdmissionStepsProps) {
 
                   {/* Empty space for alternating layout */}
                   <div className="hidden md:block md:w-5/12" />
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>

@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/footer';
 import { CookieConsent } from '@/components/shared/cookie-consent';
 import { ImageProtection } from '@/components/shared/image-protection';
 import { JsonLd } from '@/components/seo/json-ld';
+import { SmoothScrollProvider } from '@/components/shared/smooth-scroll-provider';
 import { SCHOOL_INFO } from '@/lib/constants';
 import './globals.css';
 import 'leaflet/dist/leaflet.css';
@@ -120,13 +121,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
-          <CookieConsent />
-          <ImageProtection />
+          <SmoothScrollProvider>
+            <div className="flex min-h-screen flex-col">
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+            <CookieConsent />
+            <ImageProtection />
+          </SmoothScrollProvider>
         </ThemeProvider>
       </body>
     </html>
