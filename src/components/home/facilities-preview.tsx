@@ -1,123 +1,96 @@
 'use client';
 
 import Link from 'next/link';
-import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import { ArrowRight, Check } from 'lucide-react';
 import { FACILITIES } from '@/lib/constants';
 import { cn } from '@/lib/utils';
-import { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Premium easing
-const premiumEase = [0.16, 1, 0.3, 1];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.8,
-      ease: premiumEase,
-    },
-  },
-};
-
-const headerVariants = {
-  hidden: { opacity: 0, y: 30, filter: 'blur(10px)' },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: {
-      duration: 0.8,
-      ease: premiumEase,
-    },
-  },
-};
+gsap.registerPlugin(ScrollTrigger);
 
 export function FacilitiesPreview() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const containerRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    // Header Animation
+    gsap.from(headerRef.current?.children || [], {
+      y: 30,
+      opacity: 0,
+      filter: 'blur(10px)',
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top 80%',
+        toggleActions: 'play none none reverse',
+      },
+    });
+
+    // Grid Animation
+    gsap.from(gridRef.current?.children || [], {
+      y: 50,
+      opacity: 0,
+      scale: 0.95,
+      duration: 0.8,
+      stagger: 0.15,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: gridRef.current,
+        start: 'top 85%',
+        toggleActions: 'play none none reverse',
+      },
+    });
+
+  }, { scope: containerRef });
 
   return (
     <section
-      ref={sectionRef}
+      ref={containerRef}
       className="section-padding relative overflow-hidden bg-background"
       aria-labelledby="facilities-heading"
     >
       {/* Decorative background elements */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
         <div className="absolute -right-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-primary/5 blur-3xl" />
         <div className="absolute -left-1/4 bottom-1/4 h-[400px] w-[400px] rounded-full bg-primary/5 blur-3xl" />
       </div>
 
       <div className="container-custom relative">
-        {/* Section Header with premium animations */}
-        <motion.div
-          className="mb-8 md:mb-16 text-center"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.15 },
-            },
-          }}
-        >
-          <motion.span
-            variants={headerVariants}
-            className="inline-block text-sm font-medium uppercase tracking-wider text-primary"
-          >
+        {/* Section Header */}
+        <div ref={headerRef} className="mb-8 md:mb-16 text-center">
+          <span className="inline-block text-sm font-medium uppercase tracking-wider text-primary">
             World-Class Amenities
-          </motion.span>
-          <motion.h2
+          </span>
+          <h2
             id="facilities-heading"
-            variants={headerVariants}
             className="mt-3 text-heading-xl font-bold text-foreground md:text-display"
           >
             Our Facilities
-          </motion.h2>
-          <motion.div
-            variants={headerVariants}
-            className="mx-auto mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-transparent via-primary to-transparent"
-          />
-          <motion.p
-            variants={headerVariants}
-            className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground"
-          >
+          </h2>
+          <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-transparent via-primary to-transparent" />
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
             Providing a nurturing environment with modern facilities to support
             holistic development of every student.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        {/* Facilities Grid with premium hover effects */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
+        {/* Facilities Grid */}
+        <div
+          ref={gridRef}
           className="grid gap-4 md:gap-8 md:grid-cols-2 lg:grid-cols-3"
         >
-          {FACILITIES.map((facility, index) => {
+          {FACILITIES.map((facility) => {
             const Icon = facility.icon;
             return (
-              <motion.div
+              <div
                 key={facility.id}
-                variants={itemVariants}
-                whileHover={{ y: -8 }}
-                transition={{ duration: 0.4 }}
+                className="transition-transform duration-300 hover:-translate-y-2"
               >
                 <Link
                   href={facility.href}
@@ -129,26 +102,15 @@ export function FacilitiesPreview() {
                   )}
                 >
                   {/* Gradient overlay on hover */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100 pointer-events-none" />
 
                   {/* Animated corner accent */}
-                  <motion.div
-                    className="absolute -right-10 -top-10 h-20 w-20 rounded-full bg-primary/10 transition-transform duration-700 group-hover:scale-[3]"
-                  />
+                  <div className="absolute -right-10 -top-10 h-20 w-20 rounded-full bg-primary/10 transition-transform duration-700 group-hover:scale-[3] pointer-events-none" />
 
-                  {/* Icon with premium animation */}
-                  <motion.div
-                    className="relative z-10 mb-4 md:mb-6 flex h-12 w-12 md:h-16 md:w-16 items-center justify-center rounded-xl md:rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/25"
-                    whileHover={{
-                      scale: 1.1,
-                      rotate: [0, -5, 5, 0],
-                    }}
-                    transition={{ duration: 0.5 }}
-                  >
+                  {/* Icon */}
+                  <div className="relative z-10 mb-4 md:mb-6 flex h-12 w-12 md:h-16 md:w-16 items-center justify-center rounded-xl md:rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/25 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
                     <Icon className="h-6 w-6 md:h-8 md:w-8" aria-hidden="true" />
-                  </motion.div>
+                  </div>
 
                   {/* Title */}
                   <h3 className="relative z-10 mb-2 md:mb-4 text-lg md:text-xl font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">
@@ -160,43 +122,31 @@ export function FacilitiesPreview() {
                     {facility.description}
                   </p>
 
-                  {/* Highlights with staggered animation */}
+                  {/* Highlights */}
                   <ul className="relative z-10 mb-4 md:mb-6 flex-1 space-y-2 md:space-y-3">
                     {facility.highlights.slice(0, 3).map((highlight, i) => (
-                      <motion.li
+                      <li
                         key={i}
                         className="flex items-start gap-3 text-sm text-muted-foreground"
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.1 * i }}
                       >
                         <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-primary/10">
                           <Check className="h-3 w-3 text-primary" aria-hidden="true" />
                         </span>
                         <span>{highlight}</span>
-                      </motion.li>
+                      </li>
                     ))}
                   </ul>
 
-                  {/* Premium link indicator */}
-                  <motion.div
-                    className="relative z-10 flex items-center text-sm font-medium text-primary"
-                    whileHover={{ x: 5 }}
-                  >
+                  {/* Link indicator */}
+                  <div className="relative z-10 flex items-center text-sm font-medium text-primary transition-transform duration-300 group-hover:translate-x-1">
                     <span>View More</span>
-                    <motion.span
-                      className="ml-1"
-                      animate={{ x: [0, 4, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                    </motion.span>
-                  </motion.div>
+                    <ArrowRight className="ml-1 h-4 w-4" aria-hidden="true" />
+                  </div>
                 </Link>
-              </motion.div>
+              </div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

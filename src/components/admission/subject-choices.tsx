@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { BookOpen } from 'lucide-react';
 
 const classIXSubjects = {
@@ -46,31 +45,21 @@ export function SubjectChoices() {
     <section className="section-padding bg-muted/50" aria-labelledby="subjects-heading">
       <div className="container-custom">
         <div className="mb-12 text-center">
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <span
             className="text-sm font-medium uppercase tracking-wider text-muted-foreground"
           >
             Academic Streams
-          </motion.span>
-          <motion.h2
+          </span>
+          <h2
             id="subjects-heading"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
             className="mt-2 text-heading-xl font-bold text-foreground md:text-display"
           >
             Subject Choices
-          </motion.h2>
+          </h2>
         </div>
 
         {/* Class IX */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div
           className="mb-12"
         >
           <h3 className="mb-6 flex items-center gap-2 text-heading-lg font-semibold text-foreground">
@@ -131,14 +120,10 @@ export function SubjectChoices() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Class XI */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
+        <div>
           <h3 className="mb-6 flex items-center gap-2 text-heading-lg font-semibold text-foreground">
             <BookOpen className="h-6 w-6 text-primary" aria-hidden="true" />
             Class XI Subject Options
@@ -203,7 +188,7 @@ export function SubjectChoices() {
             <strong>Note:</strong> English is compulsory for all streams in Class
             XI.
           </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

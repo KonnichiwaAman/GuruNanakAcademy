@@ -1,19 +1,51 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
 import { Quote, Sparkles, BookOpen } from 'lucide-react';
 import { SCHOOL_INFO } from '@/lib/constants';
-import { cn } from '@/lib/utils';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function AboutContent() {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const legacyRef = useRef<HTMLDivElement>(null);
+    const philosophyRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        // Legacy Section
+        gsap.from(legacyRef.current?.children || [], {
+            y: 30,
+            opacity: 0,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: legacyRef.current,
+                start: 'top 80%',
+            },
+        });
+
+        // Philosophy Section
+        gsap.from(philosophyRef.current, {
+            scale: 0.95,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: philosophyRef.current,
+                start: 'top 80%',
+            },
+        });
+    }, { scope: containerRef });
+
     return (
-        <div className="space-y-16">
+        <div ref={containerRef} className="space-y-16">
             {/* Legacy Section - Lead Text */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
+            <div
+                ref={legacyRef}
                 className="space-y-6"
             >
                 <div className="flex items-center gap-2 text-primary font-medium tracking-wide uppercase text-sm">
@@ -32,17 +64,14 @@ export function AboutContent() {
                         Education is imparted on public school lines and the Academy caters to the academic, emotional, social, psychological and co-curricular needs of students of all age groups from Nursery to class XII.
                     </p>
                 </div>
-            </motion.div>
+            </div>
 
             {/* Philosophy Section - Featured Card */}
-            <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="relative overflow-hidden rounded-3xl bg-primary/5 p-8 md:p-12"
+            <div
+                ref={philosophyRef}
+                className="relative overflow-hidden rounded-3xl bg-primary/5 p-8 md:p-12 transition-transform duration-500 hover:shadow-lg"
             >
-                <div className="absolute top-0 right-0 p-8 opacity-10">
+                <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
                     <Quote className="h-48 w-48 rotate-180" />
                 </div>
 
@@ -72,9 +101,7 @@ export function AboutContent() {
                         </div>
                     </div>
                 </div>
-            </motion.div>
-
-
+            </div>
         </div>
     );
 }
