@@ -2,8 +2,7 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { ChevronDown } from 'lucide-react';
 
-export interface SelectProps
-  extends React.SelectHTMLAttributes<HTMLSelectElement> {
+export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   error?: string;
   helperText?: string;
@@ -12,20 +11,14 @@ export interface SelectProps
 }
 
 const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
-  (
-    { className, label, error, helperText, options, placeholder, id, ...props },
-    ref
-  ) => {
+  ({ className, label, error, helperText, options, placeholder, id, ...props }, ref) => {
     const generatedId = React.useId();
     const selectId = id || props.name || generatedId;
 
     return (
       <div className="w-full">
         {label && (
-          <label
-            htmlFor={selectId}
-            className="mb-2 block text-sm font-medium text-foreground"
-          >
+          <label htmlFor={selectId} className="mb-2 block text-sm font-medium text-foreground">
             {label}
             {props.required && (
               <span className="ml-1 text-red-500" aria-hidden="true">
@@ -68,19 +61,12 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           />
         </div>
         {error && (
-          <p
-            id={`${selectId}-error`}
-            className="mt-1.5 text-sm text-red-500"
-            role="alert"
-          >
+          <p id={`${selectId}-error`} className="mt-1.5 text-sm text-red-500" role="alert">
             {error}
           </p>
         )}
         {helperText && !error && (
-          <p
-            id={`${selectId}-helper`}
-            className="mt-1.5 text-sm text-muted-foreground"
-          >
+          <p id={`${selectId}-helper`} className="mt-1.5 text-sm text-muted-foreground">
             {helperText}
           </p>
         )}

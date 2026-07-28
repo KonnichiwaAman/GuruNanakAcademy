@@ -6,7 +6,14 @@ const feePaymentSchema = z.object({
   admissionId: z.string().min(3),
   studentName: z.string().min(2),
   gradeClass: z.string().min(1),
-  feeType: z.enum(['Tuition Fee', 'Admission Fee', 'Examination Fee', 'Transport Fee', 'Hostel Fee', 'Miscellaneous Fee']),
+  feeType: z.enum([
+    'Tuition Fee',
+    'Admission Fee',
+    'Examination Fee',
+    'Transport Fee',
+    'Hostel Fee',
+    'Miscellaneous Fee',
+  ]),
   amount: z.string().refine((val) => {
     const num = parseFloat(val);
     return !isNaN(num) && num > 0 && num <= 500000;
@@ -24,7 +31,11 @@ export async function POST(request: NextRequest) {
     const validationResult = feePaymentSchema.safeParse(body);
     if (!validationResult.success) {
       return NextResponse.json(
-        { success: false, error: 'Validation failed', details: validationResult.error.flatten().fieldErrors },
+        {
+          success: false,
+          error: 'Validation failed',
+          details: validationResult.error.flatten().fieldErrors,
+        },
         { status: 400 }
       );
     }
@@ -44,15 +55,14 @@ export async function POST(request: NextRequest) {
     const keySecret = process.env.RAZORPAY_KEY_SECRET;
 
     const isMockMode =
-      !keyId ||
-      !keySecret ||
-      keyId === 'rzp_test_yourKeyId' ||
-      keySecret === 'yourKeySecret';
+      !keyId || !keySecret || keyId === 'rzp_test_yourKeyId' || keySecret === 'yourKeySecret';
 
     const amountInPaise = Math.round(parseFloat(data.amount) * 100);
 
     if (isMockMode) {
-      console.warn('[Razorpay] Warning: Credentials missing or template defaults used. Operating in Mock Mode.');
+      console.warn(
+        '[Razorpay] Warning: Credentials missing or template defaults used. Operating in Mock Mode.'
+      );
 
       const mockOrderId = `order_mock_${Math.floor(100000 + Math.random() * 900000)}`;
       return NextResponse.json({
@@ -62,7 +72,7 @@ export async function POST(request: NextRequest) {
         currency: 'INR',
         keyId: 'mock_key_id',
         mockMode: true,
-        message: 'Mock order created successfully.'
+        message: 'Mock order created successfully.',
       });
     }
 
@@ -73,7 +83,7 @@ export async function POST(request: NextRequest) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': authHeader,
+        Authorization: authHeader,
       },
       body: JSON.stringify({
         amount: amountInPaise,
@@ -86,7 +96,7 @@ export async function POST(request: NextRequest) {
           parentName: data.parentName,
           email: data.email,
           phone: data.phone,
-        }
+        },
       }),
     });
 

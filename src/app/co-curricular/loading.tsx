@@ -4,7 +4,7 @@ export default function CoCurricularLoading() {
   return (
     <div className="min-h-screen bg-background pt-20">
       {/* Hero Section Skeleton */}
-      <section className="relative overflow-hidden bg-background py-20 md:py-32 transition-colors duration-300">
+      <section className="relative overflow-hidden bg-background py-20 transition-colors duration-300 md:py-32">
         <div className="theme-grid-overlay" aria-hidden="true" />
         <div className="container-custom relative z-10">
           <div className="mx-auto max-w-3xl text-center">
@@ -26,17 +26,17 @@ export default function CoCurricularLoading() {
                   <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
                     {/* Image Block */}
                     <div className={isReversed ? 'lg:order-2' : ''}>
-                      <div className="relative aspect-video overflow-hidden rounded-2xl bg-muted animate-pulse">
-                        <Skeleton className="absolute inset-0 w-full h-full" />
+                      <div className="relative aspect-video animate-pulse overflow-hidden rounded-2xl bg-muted">
+                        <Skeleton className="absolute inset-0 h-full w-full" />
                       </div>
                     </div>
 
                     {/* Content Block */}
                     <div className={isReversed ? 'lg:order-1' : ''}>
-                      <div className="mb-4 h-14 w-14 rounded-xl bg-muted animate-pulse" />
-                      <Skeleton className="h-8 w-1/2 mb-4" />
-                      <Skeleton className="h-4 w-full mb-2" />
-                      <Skeleton className="h-4 w-full mb-6" />
+                      <div className="mb-4 h-14 w-14 animate-pulse rounded-xl bg-muted" />
+                      <Skeleton className="mb-4 h-8 w-1/2" />
+                      <Skeleton className="mb-2 h-4 w-full" />
+                      <Skeleton className="mb-6 h-4 w-full" />
 
                       {/* Badge placeholders */}
                       <div className="flex flex-wrap gap-2">
@@ -58,7 +58,7 @@ export default function CoCurricularLoading() {
         <div className="container-custom">
           <div className="mb-12 flex items-center justify-between">
             <div>
-              <Skeleton className="h-4 w-16 mb-2" />
+              <Skeleton className="mb-2 h-4 w-16" />
               <Skeleton className="h-10 w-48" />
             </div>
             <div className="hidden md:block">
@@ -70,10 +70,10 @@ export default function CoCurricularLoading() {
             {[...Array(8)].map((_, i) => (
               <div
                 key={i}
-                className="overflow-hidden rounded-xl border border-border bg-card shadow-md p-4"
+                className="overflow-hidden rounded-xl border border-border bg-card p-4 shadow-md"
               >
-                <div className="relative aspect-[4/3] rounded-lg bg-muted animate-pulse overflow-hidden">
-                  <Skeleton className="absolute inset-0 w-full h-full" />
+                <div className="relative aspect-[4/3] animate-pulse overflow-hidden rounded-lg bg-muted">
+                  <Skeleton className="absolute inset-0 h-full w-full" />
                 </div>
               </div>
             ))}

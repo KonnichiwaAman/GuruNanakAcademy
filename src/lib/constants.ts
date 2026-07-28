@@ -107,8 +107,7 @@ export const LABS: Lab[] = [
     title: 'Physics Laboratory',
     shortTitle: 'Physics Lab',
     icon: Atom,
-    description:
-      'State-of-the-art facility designed to inspire and ignite a passion for Physics.',
+    description: 'State-of-the-art facility designed to inspire and ignite a passion for Physics.',
     fullDescription:
       'Our school is proud to present a state-of-the-art Physics laboratory designed to inspire and ignite a passion for Physics in every student. Spanning an expansive area, the laboratory is thoughtfully designed with ample space for experiments, demonstrations, and collaborative learning.',
     features: [
@@ -165,8 +164,7 @@ export const LABS: Lab[] = [
     title: 'Biology Laboratory',
     shortTitle: 'Biology Lab',
     icon: Microscope,
-    description:
-      'A vibrant environment to explore the complexities of living organisms.',
+    description: 'A vibrant environment to explore the complexities of living organisms.',
     fullDescription:
       'We have a state-of-the-art Biology laboratory, a vibrant and dynamic environment where students embark on a journey to explore the complexities of living organisms. Our laboratory is equipped with advanced facilities and a wide array of equipment that cater to all branches of biology.',
     features: [
@@ -194,8 +192,7 @@ export const LABS: Lab[] = [
     title: 'Computer Laboratory',
     shortTitle: 'Computer Lab',
     icon: Monitor,
-    description:
-      'A hub of technological learning with latest computers and software programs.',
+    description: 'A hub of technological learning with latest computers and software programs.',
     fullDescription:
       'Our Computer laboratory is a hub of technological learning where students are equipped with the skills and knowledge for the digital world. Our laboratory is outfitted with the latest computers, high-speed internet access, and a variety of software programs.',
     features: [
@@ -263,8 +260,7 @@ export const FACILITIES: Facility[] = [
     id: 'library',
     title: 'Library',
     icon: BookOpen,
-    description:
-      'A sanctuary of knowledge with diverse collection of books and digital resources.',
+    description: 'A sanctuary of knowledge with diverse collection of books and digital resources.',
     highlights: [
       'Diverse collection of books and e-books',
       'Periodicals and academic journals',
@@ -332,20 +328,17 @@ export const ADMISSION_STEPS = [
   {
     step: 3,
     title: 'Entrance Test',
-    description:
-      'All students seeking admission must clear a Pre-admission/Entrance Test.',
+    description: 'All students seeking admission must clear a Pre-admission/Entrance Test.',
   },
   {
     step: 4,
     title: 'Document Verification',
-    description:
-      'Submit original report card, bonafide certificate, and transfer certificate.',
+    description: 'Submit original report card, bonafide certificate, and transfer certificate.',
   },
   {
     step: 5,
     title: 'Fee Payment',
-    description:
-      'Complete the admission formalities and fee payment at the Administrative Office.',
+    description: 'Complete the admission formalities and fee payment at the Administrative Office.',
   },
 ];
 
@@ -414,8 +407,7 @@ export const SAMPLE_EVENTS = [
     slug: 'dussehra-celebration-2025',
     date: '2025-10-12',
     category: 'Celebration',
-    excerpt:
-      'The school celebrated Dussehra with great enthusiasm and cultural programs.',
+    excerpt: 'The school celebrated Dussehra with great enthusiasm and cultural programs.',
     content:
       'The school celebrated Dussehra with great enthusiasm and cultural programs showcasing the victory of good over evil.',
     image: '/images/about.png',
@@ -466,8 +458,7 @@ export const SAMPLE_EVENTS = [
     slug: 'investiture-ceremony-2025-26',
     date: '2025-07-26',
     category: 'Ceremony',
-    excerpt:
-      'Guru Nanak Academy held its investiture ceremony for the academic year 2025-26.',
+    excerpt: 'Guru Nanak Academy held its investiture ceremony for the academic year 2025-26.',
     content:
       'Guru Nanak Academy held its investiture ceremony for the academic year 2025-26 on 26 July 2025. The ceremony was graced by our chairman Mr Harcharan Singh Pasricha. Student leaders were bestowed with their badges and responsibilities.',
     image: '/images/about.png',
@@ -479,8 +470,7 @@ export const SAMPLE_EVENTS = [
     slug: 'sahej-path-ceremony-2025',
     date: '2025-11-15',
     category: 'Ceremony',
-    excerpt:
-      'Bhog Sahej Path of Shri Guru Granth Sahib Ji was held as per tradition.',
+    excerpt: 'Bhog Sahej Path of Shri Guru Granth Sahib Ji was held as per tradition.',
     content:
       'As per tradition, Bhog Sahej Path of Shri Guru Granth Sahib Ji was held and new sahej path started keeping Guru Nanak Dev Ji Gurpurab into reverence.',
     image: '/images/about.png',

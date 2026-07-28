@@ -108,18 +108,12 @@ export function Modal({
         {(title || description) && (
           <div className="mb-4 pr-8">
             {title && (
-              <h2
-                id="modal-title"
-                className="text-heading-lg font-semibold text-foreground"
-              >
+              <h2 id="modal-title" className="text-heading-lg font-semibold text-foreground">
                 {title}
               </h2>
             )}
             {description && (
-              <p
-                id="modal-description"
-                className="mt-1 text-body-sm text-muted-foreground"
-              >
+              <p id="modal-description" className="mt-1 text-body-sm text-muted-foreground">
                 {description}
               </p>
             )}

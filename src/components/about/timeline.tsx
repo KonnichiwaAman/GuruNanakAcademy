@@ -51,7 +51,7 @@ const timelineData = [
   },
 ];
 
-function TimelineItem({ item, index }: { item: typeof timelineData[0]; index: number }) {
+function TimelineItem({ item, index }: { item: (typeof timelineData)[0]; index: number }) {
   const itemRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(itemRef, { once: true, margin: '-60px' });
 
@@ -61,9 +61,12 @@ function TimelineItem({ item, index }: { item: typeof timelineData[0]; index: nu
       className="relative grid grid-cols-[40px_1fr] gap-6 md:grid-cols-[120px_40px_1fr] md:gap-8"
     >
       {/* Year — visible on md+ */}
-      <div className="hidden md:flex items-start justify-end pt-1">
+      <div className="hidden items-start justify-end pt-1 md:flex">
         <motion.span
-          className={cn("text-base font-bold font-sans tabular-nums transition-colors duration-500", isInView ? "text-foreground" : "text-zinc-500")}
+          className={cn(
+            'font-sans text-base font-bold tabular-nums transition-colors duration-500',
+            isInView ? 'text-foreground' : 'text-zinc-500'
+          )}
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.1, ease }}
@@ -73,13 +76,13 @@ function TimelineItem({ item, index }: { item: typeof timelineData[0]; index: nu
       </div>
 
       {/* Dot */}
-      <div className="relative flex flex-col items-center w-10">
+      <div className="relative flex w-10 flex-col items-center">
         <motion.div
           className={cn(
-            "mt-2 h-3.5 w-3.5 rounded-full border-2 transition-all duration-500 z-20",
+            'z-20 mt-2 h-3.5 w-3.5 rounded-full border-2 transition-all duration-500',
             isInView
-              ? "bg-primary border-primary shadow-[0_0_10px_rgba(167,139,250,0.6)]"
-              : "bg-zinc-200 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700"
+              ? 'border-primary bg-primary shadow-[0_0_10px_rgba(167,139,250,0.6)]'
+              : 'border-zinc-300 bg-zinc-200 dark:border-zinc-700 dark:bg-zinc-800'
           )}
           initial={{ scale: 0, opacity: 0 }}
           animate={isInView ? { scale: 1.1, opacity: 1 } : { scale: 1, opacity: 0.5 }}
@@ -95,10 +98,20 @@ function TimelineItem({ item, index }: { item: typeof timelineData[0]; index: nu
         transition={{ duration: 0.6, delay: 0.08, ease }}
       >
         {/* Year — mobile only */}
-        <span className={cn("mb-1 block text-xs font-bold uppercase tracking-wider md:hidden transition-colors duration-500", isInView ? "text-foreground" : "text-zinc-500")}>
+        <span
+          className={cn(
+            'mb-1 block text-xs font-bold uppercase tracking-wider transition-colors duration-500 md:hidden',
+            isInView ? 'text-foreground' : 'text-zinc-500'
+          )}
+        >
           {item.year}
         </span>
-        <h3 className={cn("text-lg font-semibold tracking-tight transition-colors duration-500", isInView ? "text-foreground" : "text-zinc-500 dark:text-zinc-400")}>
+        <h3
+          className={cn(
+            'text-lg font-semibold tracking-tight transition-colors duration-500',
+            isInView ? 'text-foreground' : 'text-zinc-500 dark:text-zinc-400'
+          )}
+        >
           {item.title}
         </h3>
         <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
@@ -151,11 +164,11 @@ export function Timeline() {
 
         <div className="relative mx-auto max-w-3xl" ref={containerRef}>
           {/* Static background track line */}
-          <div className="absolute left-[19px] md:left-[139px] top-2 bottom-2 w-[2px] bg-zinc-200 dark:bg-zinc-800" />
+          <div className="absolute bottom-2 left-[19px] top-2 w-[2px] bg-zinc-200 dark:bg-zinc-800 md:left-[139px]" />
 
           {/* Animated progress overlay on the line */}
           <motion.div
-            className="absolute left-[19px] md:left-[139px] top-2 w-[2px] bg-primary shadow-[0_0_8px_rgba(255,140,66,0.6)] z-10 origin-top"
+            className="absolute left-[19px] top-2 z-10 w-[2px] origin-top bg-primary shadow-[0_0_8px_rgba(255,140,66,0.6)] md:left-[139px]"
             style={{ height: lineHeight }}
             aria-hidden="true"
           />

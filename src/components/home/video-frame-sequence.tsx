@@ -17,7 +17,7 @@ interface VideoFrameSequenceProps {
 export function VideoFrameSequence({ scrollContainerRef }: VideoFrameSequenceProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<(HTMLImageElement | null)[]>(new Array(TOTAL_FRAMES).fill(null));
-  
+
   const currentFrameRef = useRef(0);
   const rafRef = useRef<number | null>(null);
 
@@ -37,7 +37,7 @@ export function VideoFrameSequence({ scrollContainerRef }: VideoFrameSequencePro
       while (radius < TOTAL_FRAMES) {
         const down = targetIndex - radius;
         const up = targetIndex + radius;
-        
+
         if (down >= 0 && imagesRef.current[down]?.complete) {
           closestIndex = down;
           found = true;
@@ -55,30 +55,33 @@ export function VideoFrameSequence({ scrollContainerRef }: VideoFrameSequencePro
     return closestIndex;
   }, []);
 
-  const drawFrame = useCallback((index: number) => {
-    const renderIndex = getClosestLoadedFrame(index);
-    if (renderIndex === null) return;
+  const drawFrame = useCallback(
+    (index: number) => {
+      const renderIndex = getClosestLoadedFrame(index);
+      if (renderIndex === null) return;
 
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext('2d');
-    const img = imagesRef.current[renderIndex];
-    
-    if (!canvas || !ctx || !img || !img.complete || img.naturalWidth === 0) return;
+      const canvas = canvasRef.current;
+      const ctx = canvas?.getContext('2d');
+      const img = imagesRef.current[renderIndex];
 
-    const canvasW = canvas.width;
-    const canvasH = canvas.height;
-    const imgW = img.naturalWidth;
-    const imgH = img.naturalHeight;
+      if (!canvas || !ctx || !img || !img.complete || img.naturalWidth === 0) return;
 
-    const scale = Math.max(canvasW / imgW, canvasH / imgH);
-    const drawW = imgW * scale;
-    const drawH = imgH * scale;
-    const drawX = (canvasW - drawW) / 2;
-    const drawY = (canvasH - drawH) / 2;
+      const canvasW = canvas.width;
+      const canvasH = canvas.height;
+      const imgW = img.naturalWidth;
+      const imgH = img.naturalHeight;
 
-    ctx.clearRect(0, 0, canvasW, canvasH);
-    ctx.drawImage(img, drawX, drawY, drawW, drawH);
-  }, [getClosestLoadedFrame]);
+      const scale = Math.max(canvasW / imgW, canvasH / imgH);
+      const drawW = imgW * scale;
+      const drawH = imgH * scale;
+      const drawX = (canvasW - drawW) / 2;
+      const drawY = (canvasH - drawH) / 2;
+
+      ctx.clearRect(0, 0, canvasW, canvasH);
+      ctx.drawImage(img, drawX, drawY, drawW, drawH);
+    },
+    [getClosestLoadedFrame]
+  );
 
   const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
@@ -112,7 +115,7 @@ export function VideoFrameSequence({ scrollContainerRef }: VideoFrameSequencePro
       }
 
       const loadedSet = new Set<number>();
-      for(let i=0; i<5; i++) loadedSet.add(i);
+      for (let i = 0; i < 5; i++) loadedSet.add(i);
 
       if (cancelled) return;
 
@@ -168,7 +171,9 @@ export function VideoFrameSequence({ scrollContainerRef }: VideoFrameSequencePro
     };
 
     loadStridedFrames();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [drawFrame]);
 
   useEffect(() => {
@@ -199,5 +204,3 @@ export function VideoFrameSequence({ scrollContainerRef }: VideoFrameSequencePro
     />
   );
 }
-
-

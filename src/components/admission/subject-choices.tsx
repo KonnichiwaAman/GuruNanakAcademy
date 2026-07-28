@@ -81,9 +81,27 @@ export function SubjectChoices() {
           <div className="grid gap-6 lg:grid-cols-3">
             {Object.entries(classIXSubjects).map(([key, stream], idx) => {
               const streamAccents = [
-                { top: 'bg-emerald-500', text: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/10', badge: 'bg-emerald-500/5 text-emerald-400 border border-emerald-500/10' },
-                { top: 'bg-sky-500', text: 'text-sky-400', bg: 'bg-sky-500/10', border: 'border-sky-500/10', badge: 'bg-sky-500/5 text-sky-400 border border-sky-500/10' },
-                { top: 'bg-violet-500', text: 'text-violet-400', bg: 'bg-violet-500/10', border: 'border-violet-500/10', badge: 'bg-violet-500/5 text-violet-400 border border-violet-500/10' }
+                {
+                  top: 'bg-emerald-500',
+                  text: 'text-emerald-400',
+                  bg: 'bg-emerald-500/10',
+                  border: 'border-emerald-500/10',
+                  badge: 'bg-emerald-500/5 text-emerald-400 border border-emerald-500/10',
+                },
+                {
+                  top: 'bg-sky-500',
+                  text: 'text-sky-400',
+                  bg: 'bg-sky-500/10',
+                  border: 'border-sky-500/10',
+                  badge: 'bg-sky-500/5 text-sky-400 border border-sky-500/10',
+                },
+                {
+                  top: 'bg-violet-500',
+                  text: 'text-violet-400',
+                  bg: 'bg-violet-500/10',
+                  border: 'border-violet-500/10',
+                  badge: 'bg-violet-500/5 text-violet-400 border border-violet-500/10',
+                },
               ];
               const a = streamAccents[idx % streamAccents.length];
 
@@ -94,13 +112,9 @@ export function SubjectChoices() {
                 >
                   <div className={`h-0.5 w-full ${a.top}`} />
                   <div className="p-6">
-                    <h4 className="mb-1 text-lg font-semibold text-foreground">
-                      {stream.title}
-                    </h4>
+                    <h4 className="mb-1 text-lg font-semibold text-foreground">{stream.title}</h4>
                     {'note' in stream && stream.note && (
-                      <p className="mb-4 text-xs text-muted-foreground italic">
-                        {stream.note}
-                      </p>
+                      <p className="mb-4 text-xs italic text-muted-foreground">{stream.note}</p>
                     )}
 
                     <div className="mb-6 mt-4">
@@ -113,7 +127,9 @@ export function SubjectChoices() {
                             key={subject}
                             className="flex items-center gap-2.5 text-sm text-muted-foreground"
                           >
-                            <span className={`flex h-5 w-5 items-center justify-center rounded-full text-2xs font-bold ${a.bg} ${a.text}`}>
+                            <span
+                              className={`text-2xs flex h-5 w-5 items-center justify-center rounded-full font-bold ${a.bg} ${a.text}`}
+                            >
                               {i + 1}
                             </span>
                             {subject}
@@ -175,13 +191,25 @@ export function SubjectChoices() {
                 <tbody className="divide-y divide-border/60">
                   {classXISubjects.map((stream, idx) => {
                     const accents = [
-                      { text: 'text-emerald-400', badge: 'bg-emerald-500/5 text-emerald-400 border border-emerald-500/10', bar: 'bg-emerald-500' },
-                      { text: 'text-sky-400', badge: 'bg-sky-500/5 text-sky-400 border border-sky-500/10', bar: 'bg-sky-500' },
-                      { text: 'text-violet-400', badge: 'bg-violet-500/5 text-violet-400 border border-violet-500/10', bar: 'bg-violet-500' },
+                      {
+                        text: 'text-emerald-400',
+                        badge: 'bg-emerald-500/5 text-emerald-400 border border-emerald-500/10',
+                        bar: 'bg-emerald-500',
+                      },
+                      {
+                        text: 'text-sky-400',
+                        badge: 'bg-sky-500/5 text-sky-400 border border-sky-500/10',
+                        bar: 'bg-sky-500',
+                      },
+                      {
+                        text: 'text-violet-400',
+                        badge: 'bg-violet-500/5 text-violet-400 border border-violet-500/10',
+                        bar: 'bg-violet-500',
+                      },
                     ];
                     const a = accents[idx % accents.length];
                     return (
-                      <tr key={stream.stream} className="hover:bg-white/[0.01] transition-colors">
+                      <tr key={stream.stream} className="transition-colors hover:bg-white/[0.01]">
                         <td className="px-6 py-5 align-top">
                           <div className="flex items-center gap-3">
                             <div className={`h-4 w-1 rounded-full ${a.bar}`} />
@@ -193,10 +221,7 @@ export function SubjectChoices() {
                         <td className="px-6 py-5 align-top">
                           <ul className="space-y-1">
                             {stream.subjects.map((subject) => (
-                              <li
-                                key={subject}
-                                className="text-sm text-muted-foreground"
-                              >
+                              <li key={subject} className="text-sm text-muted-foreground">
                                 {subject}
                               </li>
                             ))}
@@ -223,8 +248,7 @@ export function SubjectChoices() {
           </div>
 
           <p className="mt-4 text-center text-sm text-muted-foreground">
-            <strong>Note:</strong> English is compulsory for all streams in Class
-            XI.
+            <strong>Note:</strong> English is compulsory for all streams in Class XI.
           </p>
         </motion.div>
       </div>

@@ -75,14 +75,11 @@ export function FacilitiesPreview() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: true, margin: '-60px' }}
           className="grid gap-4 lg:grid-cols-5"
         >
           {/* Featured card — spans 3 cols */}
-          <motion.div
-            variants={cardVariants}
-            className="lg:col-span-3"
-          >
+          <motion.div variants={cardVariants} className="lg:col-span-3">
             <Link
               href={featured.href}
               className={cn(
@@ -104,7 +101,10 @@ export function FacilitiesPreview() {
               <ul className="mt-8 space-y-2.5">
                 {featured.highlights.slice(0, 4).map((h) => (
                   <li key={h} className="flex items-start gap-2.5 text-sm text-muted-foreground">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500/80" aria-hidden="true" />
+                    <Check
+                      className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500/80"
+                      aria-hidden="true"
+                    />
                     {h}
                   </li>
                 ))}
@@ -124,11 +124,7 @@ export function FacilitiesPreview() {
               const Icon = facility.icon;
               const accentClass = facilityAccents[(i + 1) % facilityAccents.length];
               return (
-                <motion.div
-                  key={facility.id}
-                  variants={cardVariants}
-                  className="flex-1"
-                >
+                <motion.div key={facility.id} variants={cardVariants} className="flex-1">
                   <Link
                     href={facility.href}
                     className={cn(
@@ -136,11 +132,18 @@ export function FacilitiesPreview() {
                       'transition-all duration-300 hover:border-primary/30 hover:bg-primary/[0.02] hover:shadow-lg dark:hover:border-white/20 dark:hover:bg-white/[0.05]'
                     )}
                   >
-                    <div className={cn('mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg', accentClass)}>
+                    <div
+                      className={cn(
+                        'mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg',
+                        accentClass
+                      )}
+                    >
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </div>
                     <h3 className="mb-2 text-lg font-semibold text-foreground">{facility.title}</h3>
-                    <p className="flex-1 text-sm leading-relaxed text-muted-foreground">{facility.description}</p>
+                    <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
+                      {facility.description}
+                    </p>
                     <span className="mt-5 inline-flex items-center gap-1 text-xs font-medium text-muted-foreground/60 transition-colors group-hover:text-foreground">
                       View more
                       <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />

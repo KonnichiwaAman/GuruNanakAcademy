@@ -4,7 +4,7 @@ export default function EventsLoading() {
   return (
     <div className="min-h-screen bg-background pt-20">
       {/* Hero Section Skeleton */}
-      <section className="relative overflow-hidden bg-background py-16 md:py-24 transition-colors duration-300">
+      <section className="relative overflow-hidden bg-background py-16 transition-colors duration-300 md:py-24">
         <div className="theme-grid-overlay" aria-hidden="true" />
         <div className="container-custom relative z-10">
           <div className="mx-auto max-w-3xl text-center">
@@ -28,24 +28,21 @@ export default function EventsLoading() {
           {/* Events Grid */}
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(6)].map((_, i) => (
-              <div
-                key={i}
-                className="overflow-hidden rounded-2xl border border-border bg-card p-6"
-              >
+              <div key={i} className="overflow-hidden rounded-2xl border border-border bg-card p-6">
                 {/* Image Placeholder */}
-                <div className="relative aspect-video overflow-hidden rounded-xl bg-muted animate-pulse">
-                  <Skeleton className="absolute inset-0 w-full h-full" />
+                <div className="relative aspect-video animate-pulse overflow-hidden rounded-xl bg-muted">
+                  <Skeleton className="absolute inset-0 h-full w-full" />
                 </div>
 
                 {/* Content Block */}
                 <div className="pt-6">
                   {/* Date line */}
-                  <Skeleton className="h-4 w-24 mb-3" />
+                  <Skeleton className="mb-3 h-4 w-24" />
 
                   {/* Title & Description */}
-                  <Skeleton className="h-6 w-11/12 mb-2" />
-                  <Skeleton className="h-4 w-full mb-1" />
-                  <Skeleton className="h-4 w-full mb-4" />
+                  <Skeleton className="mb-2 h-6 w-11/12" />
+                  <Skeleton className="mb-1 h-4 w-full" />
+                  <Skeleton className="mb-4 h-4 w-full" />
 
                   {/* Read More Link */}
                   <Skeleton className="h-4 w-24" />

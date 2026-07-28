@@ -6,10 +6,25 @@ import { SCHOOL_INFO } from '@/lib/constants';
 import { ContactMap } from '@/components/home/contact-map';
 
 // Lazy load below-fold components for faster initial load
-const AboutSummary = dynamic(() => import('@/components/home/about-summary').then(mod => ({ default: mod.AboutSummary })), { ssr: true });
-const FacilitiesPreview = dynamic(() => import('@/components/home/facilities-preview').then(mod => ({ default: mod.FacilitiesPreview })), { ssr: true });
-const CampusIntro = dynamic(() => import('@/components/home/campus-intro').then(mod => ({ default: mod.CampusIntro })), { ssr: true });
-const EventsSection = dynamic(() => import('@/components/home/events-section').then(mod => ({ default: mod.EventsSection })), { ssr: true });
+const AboutSummary = dynamic(
+  () => import('@/components/home/about-summary').then((mod) => ({ default: mod.AboutSummary })),
+  { ssr: true }
+);
+const FacilitiesPreview = dynamic(
+  () =>
+    import('@/components/home/facilities-preview').then((mod) => ({
+      default: mod.FacilitiesPreview,
+    })),
+  { ssr: true }
+);
+const CampusIntro = dynamic(
+  () => import('@/components/home/campus-intro').then((mod) => ({ default: mod.CampusIntro })),
+  { ssr: true }
+);
+const EventsSection = dynamic(
+  () => import('@/components/home/events-section').then((mod) => ({ default: mod.EventsSection })),
+  { ssr: true }
+);
 
 export const metadata: Metadata = {
   title: `${SCHOOL_INFO.name} | Best School in Dehradun | CISCE Affiliated`,

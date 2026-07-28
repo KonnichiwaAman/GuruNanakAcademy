@@ -5,25 +5,25 @@
 @layer base {
   :root {
     /* Premium Purple Light Theme */
-    --background: 250 246 251;      /* Soft cream background with a lavender tint #FAF6FB */
-    --foreground: 45 35 48;         /* Dark warm charcoal/eggplant text #2D2330 */
+    --background: 250 246 251; /* Soft cream background with a lavender tint #FAF6FB */
+    --foreground: 45 35 48; /* Dark warm charcoal/eggplant text #2D2330 */
 
-    --card: 255 255 255;            /* White cards */
+    --card: 255 255 255; /* White cards */
     --card-foreground: 45 35 48;
 
-    --primary: 124 58 237;          /* Royal Purple #7C3AED */
+    --primary: 124 58 237; /* Royal Purple #7C3AED */
     --primary-foreground: 255 255 255;
 
-    --secondary: 243 236 245;       /* Soft warm lavender/cream #F3ECF5 */
+    --secondary: 243 236 245; /* Soft warm lavender/cream #F3ECF5 */
     --secondary-foreground: 45 35 48;
 
-    --muted: 243 236 245;           /* Same soft lavender cream for muted areas */
-    --muted-foreground: 142 126 144;/* Lavender-gray #8E7E90 */
+    --muted: 243 236 245; /* Same soft lavender cream for muted areas */
+    --muted-foreground: 142 126 144; /* Lavender-gray #8E7E90 */
 
-    --accent: 245 240 251;          /* Soft lavender tint #F5F0FB */
+    --accent: 245 240 251; /* Soft lavender tint #F5F0FB */
     --accent-foreground: 124 58 237;
 
-    --border: 234 223 234;          /* Light lavender border #EADFEA */
+    --border: 234 223 234; /* Light lavender border #EADFEA */
     --input: 234 223 234;
 
     --ring: 124 58 237;
@@ -34,25 +34,25 @@
 
   .dark {
     /* Premium Dark Theme with Glowing Lavender Brand Colors */
-    --background: 11 11 11;          /* Deep rich obsidian #0B0B0B */
-    --foreground: 236 236 236;      /* Off-white */
+    --background: 11 11 11; /* Deep rich obsidian #0B0B0B */
+    --foreground: 236 236 236; /* Off-white */
 
-    --card: 20 20 20;               /* Dark card bg */
+    --card: 20 20 20; /* Dark card bg */
     --card-foreground: 236 236 236;
 
-    --primary: 167 139 250;          /* Glowing Lavender/Violet #A78BFA */
+    --primary: 167 139 250; /* Glowing Lavender/Violet #A78BFA */
     --primary-foreground: 11 11 11; /* Deep obsidian text */
 
-    --secondary: 28 25 36;          /* Deep lavender-tinted dark gray #1C1924 */
+    --secondary: 28 25 36; /* Deep lavender-tinted dark gray #1C1924 */
     --secondary-foreground: 236 236 236;
 
     --muted: 24 24 24;
-    --muted-foreground: 140 135 150;/* Muted lavender-gray */
+    --muted-foreground: 140 135 150; /* Muted lavender-gray */
 
-    --accent: 46 37 58;             /* Warm violet/lavender highlight #2E253A */
+    --accent: 46 37 58; /* Warm violet/lavender highlight #2E253A */
     --accent-foreground: 167 139 250;
 
-    --border: 50 43 61;             /* Subtle warm border #322B3D */
+    --border: 50 43 61; /* Subtle warm border #322B3D */
     --input: 50 43 61;
 
     --ring: 167 139 250;
@@ -71,8 +71,10 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased cursor-default transition-colors duration-300;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    @apply cursor-default bg-background text-foreground antialiased transition-colors duration-300;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
   }
 
   /* Typography defaults */
@@ -133,7 +135,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground/30 rounded-full;
+    @apply rounded-full bg-muted-foreground/30;
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -149,7 +151,6 @@
 }
 
 @layer components {
-
   /* Container */
   .container-custom {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
@@ -178,7 +179,7 @@
   }
 
   .card-hover {
-    @apply hover:shadow-soft-lg hover:-translate-y-1;
+    @apply hover:-translate-y-1 hover:shadow-soft-lg;
   }
 
   /* Button base styles */
@@ -234,7 +235,7 @@
     @apply prose-headings:font-heading prose-headings:font-semibold;
     @apply prose-a:text-primary prose-a:no-underline hover:prose-a:underline;
     @apply prose-img:rounded-xl;
-    @apply prose-pre:bg-muted prose-pre:border prose-pre:border-border;
+    @apply prose-pre:border prose-pre:border-border prose-pre:bg-muted;
   }
 
   /* Glassmorphism */
@@ -399,7 +400,6 @@
 }
 
 @layer utilities {
-
   /* Text balance for better line breaking */
   .text-balance {
     text-wrap: balance;
@@ -500,5 +500,5 @@
 
 /* Theme Grid Overlay */
 .theme-grid-overlay {
-  @apply pointer-events-none absolute inset-0 opacity-[0.06] dark:opacity-[0.03] bg-[linear-gradient(to_right,rgba(0,0,0,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.1)_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:60px_60px];
+  @apply pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.1)_1px,transparent_1px)] bg-[size:60px_60px] opacity-[0.06] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.1)_1px,transparent_1px)] dark:opacity-[0.03];
 }

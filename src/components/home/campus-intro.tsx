@@ -22,7 +22,7 @@ export function CampusIntro() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-background py-20 md:py-36 lg:py-44 transition-colors duration-300"
+      className="relative overflow-hidden bg-background py-20 transition-colors duration-300 md:py-36 lg:py-44"
       aria-labelledby="campus-heading"
     >
       {/* Subtle grid overlay */}
@@ -30,7 +30,7 @@ export function CampusIntro() {
 
       {/* Radial glow — centered */}
       <div
-        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[900px] rounded-full blur-[120px]"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[120px]"
         style={{ background: 'var(--radial-glow)' }}
         aria-hidden="true"
       />
@@ -60,13 +60,13 @@ export function CampusIntro() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.16, ease }}
-            className="mt-5 space-y-3 text-sm text-muted-foreground md:text-lg md:space-y-4"
+            className="mt-5 space-y-3 text-sm text-muted-foreground md:space-y-4 md:text-lg"
           >
             <p>
-              Our school boasts of a state-of-the-art infrastructure, with modern
-              facilities that meet the highest standards of education and comfort.
-              The design is not only visually appealing but also environment
-              friendly, incorporating green spaces and sustainable practices.
+              Our school boasts of a state-of-the-art infrastructure, with modern facilities that
+              meet the highest standards of education and comfort. The design is not only visually
+              appealing but also environment friendly, incorporating green spaces and sustainable
+              practices.
             </p>
           </motion.div>
 
@@ -80,10 +80,12 @@ export function CampusIntro() {
             {stats.map((stat, i) => (
               <div
                 key={stat.label}
-                className="flex flex-col items-center justify-center bg-card dark:bg-white/[0.04] px-4 py-6 md:px-6 md:py-8"
+                className="flex flex-col items-center justify-center bg-card px-4 py-6 dark:bg-white/[0.04] md:px-6 md:py-8"
               >
                 <span className="text-2xl font-bold text-foreground md:text-3xl">{stat.value}</span>
-                <span className="mt-1 text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</span>
+                <span className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
+                  {stat.label}
+                </span>
               </div>
             ))}
           </motion.div>
@@ -97,11 +99,14 @@ export function CampusIntro() {
             <Button
               asChild
               size="lg"
-              className="group bg-primary text-primary-foreground hover:opacity-90 shadow-md font-medium border-0"
+              className="group border-0 bg-primary font-medium text-primary-foreground shadow-md hover:opacity-90"
             >
               <Link href="/admission/form">
                 Apply Now
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
+                <ArrowRight
+                  className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
               </Link>
             </Button>
           </motion.div>

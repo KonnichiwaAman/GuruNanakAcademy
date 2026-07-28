@@ -11,7 +11,7 @@ export function CampusStats() {
   const inView = useInView(ref, { once: true, margin: '-60px' });
 
   return (
-    <section ref={ref} className="bg-background py-16 md:py-24 transition-colors duration-300">
+    <section ref={ref} className="bg-background py-16 transition-colors duration-300 md:py-24">
       <div className="container-custom">
         {/* Editorial rule + label */}
         <motion.div

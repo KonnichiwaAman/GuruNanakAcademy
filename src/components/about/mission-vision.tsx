@@ -87,7 +87,7 @@ export function MissionVision() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: true, margin: '-60px' }}
           className="grid gap-8 md:grid-cols-3"
         >
           {values.map((item) => {
@@ -96,20 +96,20 @@ export function MissionVision() {
               <motion.div
                 key={item.title}
                 variants={cardVariants}
-                className="rounded-2xl border border-border bg-card p-6 text-center md:p-8 hover:shadow-2xl transition-all duration-300 shadow-xl hover:border-primary/25"
+                className="rounded-2xl border border-border bg-card p-6 text-center shadow-xl transition-all duration-300 hover:border-primary/25 hover:shadow-2xl md:p-8"
               >
-                <div className={cn(
-                  "mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl md:mb-5 md:h-16 md:w-16 transition-all duration-300",
-                  item.bgClass,
-                  item.colorClass,
-                  item.glowClass
-                )}>
+                <div
+                  className={cn(
+                    'mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl transition-all duration-300 md:mb-5 md:h-16 md:w-16',
+                    item.bgClass,
+                    item.colorClass,
+                    item.glowClass
+                  )}
+                >
                   <Icon className="h-6 w-6 md:h-8 md:w-8" aria-hidden="true" />
                 </div>
-                <h3 className="mb-3 text-xl font-bold text-foreground">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+                <h3 className="mb-3 text-xl font-bold text-foreground">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{item.description}</p>
               </motion.div>
             );
           })}
@@ -142,7 +142,7 @@ export function MissionVision() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="rounded-xl border border-border bg-secondary/30 dark:bg-zinc-900/60 p-4 text-center hover:border-primary/40 hover:text-primary transition-colors duration-300 cursor-default"
+                className="cursor-default rounded-xl border border-border bg-secondary/30 p-4 text-center transition-colors duration-300 hover:border-primary/40 hover:text-primary dark:bg-zinc-900/60"
               >
                 <span className="text-sm font-medium transition-colors">{value}</span>
               </motion.div>

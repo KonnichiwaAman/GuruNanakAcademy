@@ -27,36 +27,33 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({
         success: true,
         message: 'Mock payment verified successfully.',
-        transactionId: razorpay_payment_id
+        transactionId: razorpay_payment_id,
       });
     }
 
     // Cryptographic signature verification
     const text = `${razorpay_order_id}|${razorpay_payment_id}`;
-    const generatedSignature = crypto
-      .createHmac('sha256', keySecret!)
-      .update(text)
-      .digest('hex');
+    const generatedSignature = crypto.createHmac('sha256', keySecret!).update(text).digest('hex');
 
     const isValid = generatedSignature === razorpay_signature;
 
     if (isValid) {
       console.log('[Razorpay Verification] Successful verification:', {
         orderId: razorpay_order_id,
-        paymentId: razorpay_payment_id
+        paymentId: razorpay_payment_id,
       });
 
       return NextResponse.json({
         success: true,
         message: 'Payment verified successfully.',
-        transactionId: razorpay_payment_id
+        transactionId: razorpay_payment_id,
       });
     } else {
       console.error('[Razorpay Verification] Signature mismatch:', {
         orderId: razorpay_order_id,
         paymentId: razorpay_payment_id,
         expected: generatedSignature,
-        received: razorpay_signature
+        received: razorpay_signature,
       });
 
       return NextResponse.json(

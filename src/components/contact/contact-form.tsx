@@ -10,7 +10,9 @@ import { Button } from '@/components/ui/button';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 
 export function ContactForm() {
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>(
+    'idle'
+  );
 
   const {
     register,
@@ -57,10 +59,7 @@ export function ContactForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="grid gap-6 md:grid-cols-2">
         <div>
-          <label
-            htmlFor="name"
-            className="mb-2 block text-sm font-medium text-foreground"
-          >
+          <label htmlFor="name" className="mb-2 block text-sm font-medium text-foreground">
             Full Name <span className="text-red-500">*</span>
           </label>
           <Input
@@ -69,16 +68,11 @@ export function ContactForm() {
             placeholder="Your full name"
             aria-invalid={!!errors.name}
           />
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>
-          )}
+          {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>}
         </div>
 
         <div>
-          <label
-            htmlFor="email"
-            className="mb-2 block text-sm font-medium text-foreground"
-          >
+          <label htmlFor="email" className="mb-2 block text-sm font-medium text-foreground">
             Email Address <span className="text-red-500">*</span>
           </label>
           <Input
@@ -88,36 +82,21 @@ export function ContactForm() {
             placeholder="your.email@example.com"
             aria-invalid={!!errors.email}
           />
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
-          )}
+          {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
         </div>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
         <div>
-          <label
-            htmlFor="phone"
-            className="mb-2 block text-sm font-medium text-foreground"
-          >
+          <label htmlFor="phone" className="mb-2 block text-sm font-medium text-foreground">
             Phone Number
           </label>
-          <Input
-            id="phone"
-            type="tel"
-            {...register('phone')}
-            placeholder="+91 XXXXX XXXXX"
-          />
-          {errors.phone && (
-            <p className="mt-1 text-sm text-red-500">{errors.phone.message}</p>
-          )}
+          <Input id="phone" type="tel" {...register('phone')} placeholder="+91 XXXXX XXXXX" />
+          {errors.phone && <p className="mt-1 text-sm text-red-500">{errors.phone.message}</p>}
         </div>
 
         <div>
-          <label
-            htmlFor="subject"
-            className="mb-2 block text-sm font-medium text-foreground"
-          >
+          <label htmlFor="subject" className="mb-2 block text-sm font-medium text-foreground">
             Subject <span className="text-red-500">*</span>
           </label>
           <Input
@@ -126,17 +105,12 @@ export function ContactForm() {
             placeholder="What is this about?"
             aria-invalid={!!errors.subject}
           />
-          {errors.subject && (
-            <p className="mt-1 text-sm text-red-500">{errors.subject.message}</p>
-          )}
+          {errors.subject && <p className="mt-1 text-sm text-red-500">{errors.subject.message}</p>}
         </div>
       </div>
 
       <div>
-        <label
-          htmlFor="message"
-          className="mb-2 block text-sm font-medium text-foreground"
-        >
+        <label htmlFor="message" className="mb-2 block text-sm font-medium text-foreground">
           Message <span className="text-red-500">*</span>
         </label>
         <Textarea
@@ -146,9 +120,7 @@ export function ContactForm() {
           rows={6}
           aria-invalid={!!errors.message}
         />
-        {errors.message && (
-          <p className="mt-1 text-sm text-red-500">{errors.message.message}</p>
-        )}
+        {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message.message}</p>}
       </div>
 
       {submitStatus === 'success' && (

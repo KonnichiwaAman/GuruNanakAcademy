@@ -49,14 +49,10 @@ export function AboutSummary() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.35, ease }}
-              className="absolute -bottom-4 right-2 rounded-xl border border-border/60 dark:border-white/10 bg-card/90 dark:bg-zinc-900/90 px-4 py-3 shadow-2xl backdrop-blur-md sm:-bottom-6 sm:-right-4 md:-right-6 sm:px-7 sm:py-5 md:px-7 md:py-5"
+              className="absolute -bottom-4 right-2 rounded-xl border border-border/60 bg-card/90 px-4 py-3 shadow-2xl backdrop-blur-md dark:border-white/10 dark:bg-zinc-900/90 sm:-bottom-6 sm:-right-4 sm:px-7 sm:py-5 md:-right-6 md:px-7 md:py-5"
             >
-              <p className="text-3xl font-bold text-foreground md:text-5xl">
-                50+
-              </p>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Years of Excellence
-              </p>
+              <p className="text-3xl font-bold text-foreground md:text-5xl">50+</p>
+              <p className="mt-1 text-sm text-muted-foreground">Years of Excellence</p>
             </motion.div>
           </motion.div>
 
@@ -79,23 +75,21 @@ export function AboutSummary() {
 
             <div className="mt-7 space-y-4 text-muted-foreground">
               <p className="text-base leading-relaxed text-muted-foreground md:text-lg">
-                {SCHOOL_INFO.name} is one of the finest co-educational boarding
-                and day-boarding Schools in India with a strong intellectual
-                heart-beat. The Academy is set up on a sprawling campus of{' '}
-                <span className="font-medium text-foreground">{SCHOOL_INFO.campusSize}</span>{' '}
-                in the heart of Dehradun.
+                {SCHOOL_INFO.name} is one of the finest co-educational boarding and day-boarding
+                Schools in India with a strong intellectual heart-beat. The Academy is set up on a
+                sprawling campus of{' '}
+                <span className="font-medium text-foreground">{SCHOOL_INFO.campusSize}</span> in the
+                heart of Dehradun.
               </p>
               <p className="text-base leading-relaxed">
                 Founded by Guru Nanak Academy Society in{' '}
-                <span className="font-medium text-foreground">{SCHOOL_INFO.founded}</span> on
-                the occasion of the 500th birth anniversary of Shri Guru Nanak Dev
-                Ji, who stood for truthful living and equality of all religions,
-                caste and creed.
+                <span className="font-medium text-foreground">{SCHOOL_INFO.founded}</span> on the
+                occasion of the 500th birth anniversary of Shri Guru Nanak Dev Ji, who stood for
+                truthful living and equality of all religions, caste and creed.
               </p>
               <p className="text-base leading-relaxed">
-                The Academy caters to the academic, emotional, social,
-                psychological and co-curricular needs of students from Nursery to
-                Class XII, affiliated to{' '}
+                The Academy caters to the academic, emotional, social, psychological and
+                co-curricular needs of students from Nursery to Class XII, affiliated to{' '}
                 <span className="font-medium text-foreground">{SCHOOL_INFO.affiliation}</span>.
               </p>
             </div>
@@ -109,7 +103,10 @@ export function AboutSummary() {
               <Button asChild size="lg" variant="outline" className="group">
                 <Link href="/about">
                   Learn More
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
+                  <ArrowRight
+                    className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  />
                 </Link>
               </Button>
             </motion.div>

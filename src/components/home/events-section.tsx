@@ -50,7 +50,7 @@ export function EventsSection() {
     >
       <div className="container-custom">
         {/* Header */}
-        <div className="mb-10 flex flex-col items-start justify-between gap-5 md:mb-14 sm:flex-row sm:items-end">
+        <div className="mb-10 flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-end md:mb-14">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -75,7 +75,10 @@ export function EventsSection() {
             <Button asChild variant="outline" className="group">
               <Link href="/events">
                 View All Events
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
+                <ArrowRight
+                  className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                  aria-hidden="true"
+                />
               </Link>
             </Button>
           </motion.div>
@@ -86,14 +89,11 @@ export function EventsSection() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: true, margin: '-60px' }}
           className="grid gap-5 md:grid-cols-2 lg:grid-cols-3"
         >
           {featuredEvents.map((event) => (
-            <motion.article
-              key={event.id}
-              variants={cardVariants}
-            >
+            <motion.article key={event.id} variants={cardVariants}>
               <Link
                 href={`/events/${event.slug}`}
                 className={cn(
@@ -105,7 +105,10 @@ export function EventsSection() {
                   <PremiumGradientPlaceholder icon={Calendar} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
                   <div className="absolute left-4 top-4">
-                    <Badge variant="secondary" className="border-0 bg-black/40 text-white backdrop-blur-md text-xs">
+                    <Badge
+                      variant="secondary"
+                      className="border-0 bg-black/40 text-xs text-white backdrop-blur-md"
+                    >
                       {event.category}
                     </Badge>
                   </div>
@@ -115,15 +118,18 @@ export function EventsSection() {
                     <Calendar className="h-3.5 w-3.5" aria-hidden="true" />
                     <time dateTime={event.date}>{formatDate(event.date)}</time>
                   </div>
-                  <h3 className="mb-2 text-lg font-semibold text-foreground line-clamp-2 group-hover:text-primary dark:group-hover:text-white transition-colors">
+                  <h3 className="mb-2 line-clamp-2 text-lg font-semibold text-foreground transition-colors group-hover:text-primary dark:group-hover:text-white">
                     {event.title}
                   </h3>
-                  <p className="flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-2">
+                  <p className="line-clamp-2 flex-1 text-sm leading-relaxed text-muted-foreground">
                     {event.excerpt}
                   </p>
                   <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-foreground/60 transition-colors group-hover:text-foreground">
                     Read More
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                    <ArrowRight
+                      className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
+                      aria-hidden="true"
+                    />
                   </span>
                 </div>
               </Link>
