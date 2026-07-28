@@ -48,7 +48,8 @@ export function JsonLd() {
         '@type': 'School',
         '@id': `${SITE_URL}/#school`,
         name: SCHOOL_INFO.name,
-        description: 'One of the best schools in Dehradun offering CISCE curriculum with boarding and day-boarding facilities.',
+        description:
+          'One of the best schools in Dehradun offering CISCE curriculum with boarding and day-boarding facilities.',
         url: SITE_URL,
         telephone: SCHOOL_INFO.phones[0].number,
         parentOrganization: {
@@ -123,7 +124,8 @@ export function JsonLd() {
         '@id': `${SITE_URL}/#website`,
         url: SITE_URL,
         name: SCHOOL_INFO.name,
-        description: 'Official website of Guru Nanak Academy, Dehradun - One of the best schools in Dehradun',
+        description:
+          'Official website of Guru Nanak Academy, Dehradun - One of the best schools in Dehradun',
         publisher: {
           '@id': `${SITE_URL}/#organization`,
         },

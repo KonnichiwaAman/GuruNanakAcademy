@@ -1,4 +1,6 @@
 import type { Config } from 'tailwindcss';
+import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
 
 const config: Config = {
   darkMode: 'class',
@@ -10,11 +12,11 @@ const config: Config = {
   ],
   theme: {
     screens: {
-      'xs': '375px',
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
+      xs: '375px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
       '2xl': '1536px',
     },
     extend: {
@@ -81,15 +83,15 @@ const config: Config = {
         'fluid-display': 'clamp(3rem, 2.4rem + 3vw, 6rem)',
         'display-xl': ['4.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
         'display-lg': ['3.75rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
-        'display': ['3rem', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
+        display: ['3rem', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
         'heading-xl': ['2.25rem', { lineHeight: '1.25', letterSpacing: '-0.01em' }],
         'heading-lg': ['1.875rem', { lineHeight: '1.3', letterSpacing: '-0.01em' }],
-        'heading': ['1.5rem', { lineHeight: '1.4' }],
+        heading: ['1.5rem', { lineHeight: '1.4' }],
         'heading-sm': ['1.25rem', { lineHeight: '1.4' }],
         'body-lg': ['1.125rem', { lineHeight: '1.6' }],
-        'body': ['1rem', { lineHeight: '1.6' }],
+        body: ['1rem', { lineHeight: '1.6' }],
         'body-sm': ['0.875rem', { lineHeight: '1.5' }],
-        'caption': ['0.75rem', { lineHeight: '1.4' }],
+        caption: ['0.75rem', { lineHeight: '1.4' }],
       },
       spacing: {
         'fluid-gap': 'clamp(1rem, 0.8rem + 1vw, 2rem)',
@@ -106,7 +108,7 @@ const config: Config = {
         '4xl': '2rem',
       },
       boxShadow: {
-        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+        soft: '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
         'soft-lg': '0 10px 40px -15px rgba(0, 0, 0, 0.1)',
         'soft-xl': '0 20px 60px -20px rgba(0, 0, 0, 0.15)',
         'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.05)',
@@ -150,10 +152,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
-  ],
+  plugins: [typography, forms],
 };
 
 export default config;

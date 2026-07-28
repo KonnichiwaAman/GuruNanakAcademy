@@ -11,18 +11,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          'bg-primary text-primary-foreground shadow hover:bg-primary/90',
-        secondary:
-          'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
+        default: 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
+        secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
         outline:
           'border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground',
-        ghost:
-          'hover:bg-accent hover:text-accent-foreground',
-        link:
-          'text-primary underline-offset-4 hover:underline',
-        destructive:
-          'bg-red-600 text-white shadow-sm hover:bg-red-700',
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        link: 'text-primary underline-offset-4 hover:underline',
+        destructive: 'bg-red-600 text-white shadow-sm hover:bg-red-700',
       },
       size: {
         default: 'h-10 px-5 py-2',
@@ -40,8 +35,7 @@ const buttonVariants = cva(
 );
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   isLoading?: boolean;
   leftIcon?: React.ReactNode;
@@ -72,16 +66,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         return null;
       }
       return (
-        <Slot
-          className={cn(buttonVariants({ variant, size, className }))}
-          ref={ref}
-          {...props}
-        >
+        <Slot className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
           {children}
         </Slot>
       );
     }
-    
+
     return (
       <button
         className={cn(buttonVariants({ variant, size, className }))}

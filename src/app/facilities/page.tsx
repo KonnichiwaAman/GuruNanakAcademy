@@ -8,7 +8,8 @@ export const metadata: Metadata = {
   description: `Explore world-class facilities at ${SCHOOL_INFO.name}. Modern laboratories, library, sports facilities, and more on our ${SCHOOL_INFO.campusSize} campus.`,
   openGraph: {
     title: `Facilities | ${SCHOOL_INFO.name}`,
-    description: 'State-of-the-art facilities including Physics, Chemistry, Biology, and Computer labs.',
+    description:
+      'State-of-the-art facilities including Physics, Chemistry, Biology, and Computer labs.',
     url: '/facilities',
   },
   alternates: {
@@ -20,26 +21,28 @@ export default function FacilitiesPage() {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-background py-16 md:py-24 transition-colors duration-300">
+      <section className="relative overflow-hidden bg-background py-16 transition-colors duration-300 md:py-24">
         <div className="theme-grid-overlay" aria-hidden="true" />
         <div
-          className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[700px] rounded-full blur-[100px]"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px]"
           style={{ background: 'var(--radial-glow)' }}
           aria-hidden="true"
         />
         <div className="container-custom relative z-10">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border/60 dark:border-white/10 bg-secondary/50 dark:bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground dark:text-white/60 backdrop-blur-md">
-              <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/40 dark:bg-white/40" aria-hidden="true" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/50 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground backdrop-blur-md dark:border-white/10 dark:bg-white/5 dark:text-white/60">
+              <span
+                className="h-1.5 w-1.5 rounded-full bg-muted-foreground/40 dark:bg-white/40"
+                aria-hidden="true"
+              />
               World-Class Infrastructure
             </span>
             <h1 className="mt-5 text-3xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
               Our Facilities
             </h1>
             <p className="mt-5 text-base text-muted-foreground md:text-lg">
-              Our school boasts of state-of-the-art infrastructure with modern
-              facilities that meet the highest standards of education and
-              comfort.
+              Our school boasts of state-of-the-art infrastructure with modern facilities that meet
+              the highest standards of education and comfort.
             </p>
           </div>
         </div>
@@ -57,19 +60,35 @@ export default function FacilitiesPage() {
               const Icon = lab.icon;
               const isReversed = index % 2 === 1;
               const accents = [
-                { bg: 'bg-blue-500/10', text: 'text-blue-400', check: 'text-blue-400', bullet: 'bg-blue-400' },
-                { bg: 'bg-emerald-500/10', text: 'text-emerald-400', check: 'text-emerald-400', bullet: 'bg-emerald-400' },
-                { bg: 'bg-violet-500/10', text: 'text-violet-400', check: 'text-violet-400', bullet: 'bg-violet-400' },
-                { bg: 'bg-amber-500/10', text: 'text-amber-400', check: 'text-amber-400', bullet: 'bg-amber-400' },
+                {
+                  bg: 'bg-blue-500/10',
+                  text: 'text-blue-400',
+                  check: 'text-blue-400',
+                  bullet: 'bg-blue-400',
+                },
+                {
+                  bg: 'bg-emerald-500/10',
+                  text: 'text-emerald-400',
+                  check: 'text-emerald-400',
+                  bullet: 'bg-emerald-400',
+                },
+                {
+                  bg: 'bg-violet-500/10',
+                  text: 'text-violet-400',
+                  check: 'text-violet-400',
+                  bullet: 'bg-violet-400',
+                },
+                {
+                  bg: 'bg-amber-500/10',
+                  text: 'text-amber-400',
+                  check: 'text-amber-400',
+                  bullet: 'bg-amber-400',
+                },
               ];
               const a = accents[index % accents.length];
 
               return (
-                <div
-                  key={lab.id}
-                  id={lab.id}
-                  className="scroll-mt-24"
-                >
+                <div key={lab.id} id={lab.id} className="scroll-mt-24">
                   <div
                     className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-12 ${
                       isReversed ? 'lg:flex-row-reverse' : ''
@@ -84,21 +103,19 @@ export default function FacilitiesPage() {
 
                     {/* Content */}
                     <div className={isReversed ? 'lg:order-1' : ''}>
-                      <div className={`mb-4 flex h-14 w-14 items-center justify-center rounded-xl ${a.bg} ${a.text}`}>
+                      <div
+                        className={`mb-4 flex h-14 w-14 items-center justify-center rounded-xl ${a.bg} ${a.text}`}
+                      >
                         <Icon className="h-7 w-7" aria-hidden="true" />
                       </div>
                       <h3 className="mb-4 text-heading-lg font-bold text-foreground">
                         {lab.title}
                       </h3>
-                      <p className="mb-6 text-muted-foreground">
-                        {lab.fullDescription}
-                      </p>
+                      <p className="mb-6 text-muted-foreground">{lab.fullDescription}</p>
 
                       <div className="grid gap-6 md:grid-cols-2">
                         <div>
-                          <h4 className="mb-3 font-semibold text-foreground">
-                            Key Features
-                          </h4>
+                          <h4 className="mb-3 font-semibold text-foreground">Key Features</h4>
                           <ul className="space-y-2">
                             {lab.features.map((feature) => (
                               <li
@@ -115,16 +132,16 @@ export default function FacilitiesPage() {
                           </ul>
                         </div>
                         <div>
-                          <h4 className="mb-3 font-semibold text-foreground">
-                            Equipment
-                          </h4>
+                          <h4 className="mb-3 font-semibold text-foreground">Equipment</h4>
                           <ul className="space-y-2">
                             {lab.equipment.map((item) => (
                               <li
                                 key={item}
                                 className="flex items-start gap-2 text-sm text-muted-foreground"
                               >
-                                <span className={`mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full ${a.bullet}`} />
+                                <span
+                                  className={`mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full ${a.bullet}`}
+                                />
                                 {item}
                               </li>
                             ))}
@@ -141,7 +158,7 @@ export default function FacilitiesPage() {
       </section>
 
       {/* Library Section */}
-      <section id="library" className="section-padding bg-muted/50 scroll-mt-24">
+      <section id="library" className="section-padding scroll-mt-24 bg-muted/50">
         <div className="container-custom">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Image */}
@@ -158,15 +175,14 @@ export default function FacilitiesPage() {
                 Library
               </h2>
               <p className="mt-4 text-muted-foreground">
-                Our library is a sanctuary of knowledge, equipped with a diverse
-                collection of books, e-books, periodicals, and multimedia content.
-                It provides comfortable reading areas and collaborative workspaces
-                for students.
+                Our library is a sanctuary of knowledge, equipped with a diverse collection of
+                books, e-books, periodicals, and multimedia content. It provides comfortable reading
+                areas and collaborative workspaces for students.
               </p>
               <p className="mt-4 text-muted-foreground">
-                The library is designed to encourage a love for reading and
-                research, with resources covering all academic subjects as well as
-                general knowledge, fiction, and reference materials.
+                The library is designed to encourage a love for reading and research, with resources
+                covering all academic subjects as well as general knowledge, fiction, and reference
+                materials.
               </p>
 
               <ul className="mt-6 grid gap-3 md:grid-cols-2">
@@ -182,10 +198,7 @@ export default function FacilitiesPage() {
                     key={feature}
                     className="flex items-center gap-2 text-sm text-muted-foreground"
                   >
-                    <Check
-                      className="h-4 w-4 flex-shrink-0 text-emerald-400"
-                      aria-hidden="true"
-                    />
+                    <Check className="h-4 w-4 flex-shrink-0 text-emerald-400" aria-hidden="true" />
                     {feature}
                   </li>
                 ))}
@@ -250,15 +263,13 @@ export default function FacilitiesPage() {
                   className={`group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:shadow-lg ${borderHover}`}
                 >
                   <div className="relative aspect-video overflow-hidden">
-                    <PremiumGradientPlaceholder icon={facility.title === 'Gymnasium' ? Activity : Trophy} />
+                    <PremiumGradientPlaceholder
+                      icon={facility.title === 'Gymnasium' ? Activity : Trophy}
+                    />
                   </div>
                   <div className="p-6">
-                    <h3 className="mb-2 text-lg font-semibold text-foreground">
-                      {facility.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {facility.description}
-                    </p>
+                    <h3 className="mb-2 text-lg font-semibold text-foreground">{facility.title}</h3>
+                    <p className="text-sm text-muted-foreground">{facility.description}</p>
                   </div>
                 </div>
               );
@@ -279,15 +290,13 @@ export default function FacilitiesPage() {
                 Smart Classrooms
               </h2>
               <p className="mt-4 text-muted-foreground">
-                Each classroom is well-equipped with the latest educational tools
-                and resources, ensuring an engaging and interactive learning
-                environment. Our smart classrooms feature digital boards,
-                projectors, and audio-visual aids.
+                Each classroom is well-equipped with the latest educational tools and resources,
+                ensuring an engaging and interactive learning environment. Our smart classrooms
+                feature digital boards, projectors, and audio-visual aids.
               </p>
               <p className="mt-4 text-muted-foreground">
-                The design is not only visually appealing but also environment
-                friendly, incorporating green spaces and sustainable practices
-                throughout the campus.
+                The design is not only visually appealing but also environment friendly,
+                incorporating green spaces and sustainable practices throughout the campus.
               </p>
 
               <ul className="mt-6 space-y-3">
@@ -303,10 +312,7 @@ export default function FacilitiesPage() {
                     key={feature}
                     className="flex items-center gap-2 text-sm text-muted-foreground"
                   >
-                    <Check
-                      className="h-4 w-4 flex-shrink-0 text-emerald-400"
-                      aria-hidden="true"
-                    />
+                    <Check className="h-4 w-4 flex-shrink-0 text-emerald-400" aria-hidden="true" />
                     {feature}
                   </li>
                 ))}

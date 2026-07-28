@@ -1,6 +1,8 @@
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
-export async function verifyTurnstileToken(token: string): Promise<{ success: boolean; error?: string }> {
+export async function verifyTurnstileToken(
+  token: string
+): Promise<{ success: boolean; error?: string }> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
 
   if (!secret) {
@@ -22,7 +24,7 @@ export async function verifyTurnstileToken(token: string): Promise<{ success: bo
       return { success: false, error: 'CAPTCHA verification service unavailable' };
     }
 
-    const data = await res.json() as { success: boolean; 'error-codes'?: string[] };
+    const data = (await res.json()) as { success: boolean; 'error-codes'?: string[] };
     if (!data.success) {
       return { success: false, error: 'CAPTCHA verification failed' };
     }

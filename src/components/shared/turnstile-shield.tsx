@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useEffect, useRef, useState } from "react";
-import { useTheme } from "next-themes";
+import React, { useEffect, useRef, useState } from 'react';
+import { useTheme } from 'next-themes';
 
 interface TurnstileShieldProps {
   onChallengeSuccess: (token: string) => void;
@@ -16,7 +16,7 @@ declare global {
         options: {
           sitekey: string;
           callback: (token: string) => void;
-          "expired-callback"?: () => void;
+          'expired-callback'?: () => void;
           theme?: string;
         }
       ) => string;
@@ -31,30 +31,30 @@ export function TurnstileShield({ onChallengeSuccess, onChallengeExpire }: Turns
   const { resolvedTheme } = useTheme();
 
   useEffect(() => {
-    let scriptTag = document.getElementById("cloudflare-turnstile") as HTMLScriptElement;
+    let scriptTag = document.getElementById('cloudflare-turnstile') as HTMLScriptElement;
     let localWidgetId: string | null = null;
 
     const mountTurnstile = () => {
       if (window.turnstile && targetContainerRef.current && !localWidgetId) {
         try {
           const id = window.turnstile.render(targetContainerRef.current, {
-            sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA", // Mock Turnstile key
+            sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA', // Mock Turnstile key
             callback: onChallengeSuccess,
-            "expired-callback": onChallengeExpire,
-            theme: resolvedTheme === "dark" ? "dark" : "light",
+            'expired-callback': onChallengeExpire,
+            theme: resolvedTheme === 'dark' ? 'dark' : 'light',
           });
           localWidgetId = id;
           setWidgetId(id);
         } catch (e) {
-          console.error("Error rendering Turnstile widget:", e);
+          console.error('Error rendering Turnstile widget:', e);
         }
       }
     };
 
     if (!scriptTag) {
-      scriptTag = document.createElement("script");
-      scriptTag.id = "cloudflare-turnstile";
-      scriptTag.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      scriptTag = document.createElement('script');
+      scriptTag.id = 'cloudflare-turnstile';
+      scriptTag.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
       scriptTag.async = true;
       scriptTag.defer = true;
       document.head.appendChild(scriptTag);
@@ -63,13 +63,13 @@ export function TurnstileShield({ onChallengeSuccess, onChallengeExpire }: Turns
       if (window.turnstile) {
         mountTurnstile();
       } else {
-        scriptTag.addEventListener("load", mountTurnstile);
+        scriptTag.addEventListener('load', mountTurnstile);
       }
     }
 
     return () => {
       if (scriptTag) {
-        scriptTag.removeEventListener("load", mountTurnstile);
+        scriptTag.removeEventListener('load', mountTurnstile);
       }
       if (window.turnstile && localWidgetId) {
         try {
@@ -82,7 +82,7 @@ export function TurnstileShield({ onChallengeSuccess, onChallengeExpire }: Turns
   }, [onChallengeSuccess, onChallengeExpire, resolvedTheme]);
 
   return (
-    <div className="flex justify-center my-4">
+    <div className="my-4 flex justify-center">
       <div ref={targetContainerRef} className="min-h-[65px]" />
     </div>
   );

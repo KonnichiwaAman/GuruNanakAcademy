@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
 interface CanvasSequenceProps {
   frameCount: number;
@@ -22,7 +22,7 @@ export const CanvasSequence: React.FC<CanvasSequenceProps> = ({
   const [loadProgress, setLoadProgress] = useState(0);
 
   const getFramePath = (index: number) => {
-    const frameString = String(index).padStart(4, "0");
+    const frameString = String(index).padStart(4, '0');
     return `${imagePrefix}${frameString}.${imageExtension}`;
   };
 
@@ -58,7 +58,7 @@ export const CanvasSequence: React.FC<CanvasSequenceProps> = ({
     if (!isPreloaded || !canvasRef.current || !containerRef.current) return;
 
     const canvas = canvasRef.current;
-    const context = canvas.getContext("2d", { alpha: false });
+    const context = canvas.getContext('2d', { alpha: false });
     if (!context) return;
 
     const drawImageCover = (img: HTMLImageElement) => {
@@ -98,10 +98,7 @@ export const CanvasSequence: React.FC<CanvasSequenceProps> = ({
       const scrollFraction = Math.max(0, Math.min(0.999, rawFraction));
 
       // Calculate the active frame index using standard interpolation
-      const frameIndex = Math.min(
-        frameCount - 1,
-        Math.floor(scrollFraction * frameCount)
-      );
+      const frameIndex = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount));
 
       const renderFrame = () => {
         const activeImage = imagesRef.current[frameIndex];
@@ -121,13 +118,13 @@ export const CanvasSequence: React.FC<CanvasSequenceProps> = ({
       handleScroll();
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationId);
     };
   }, [isPreloaded, frameCount]);
@@ -136,8 +133,8 @@ export const CanvasSequence: React.FC<CanvasSequenceProps> = ({
     <div ref={containerRef} className="relative h-[300vh] w-full">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {!isPreloaded && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black text-white z-50">
-            <span className="text-sm font-semibold tracking-widest uppercase text-gold">
+          <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black text-white">
+            <span className="text-sm font-semibold uppercase tracking-widest text-gold">
               Initializing Digital Experience
             </span>
             <div className="mt-4 h-[2px] w-48 bg-zinc-800">
@@ -151,7 +148,7 @@ export const CanvasSequence: React.FC<CanvasSequenceProps> = ({
         <canvas
           ref={canvasRef}
           className="block h-full w-full object-cover"
-          style={{ willChange: "transform" }}
+          style={{ willChange: 'transform' }}
         />
       </div>
     </div>

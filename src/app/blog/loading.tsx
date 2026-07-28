@@ -4,7 +4,7 @@ export default function BlogLoading() {
   return (
     <div className="min-h-screen bg-background pt-20">
       {/* Hero Section Skeleton */}
-      <section className="relative overflow-hidden bg-background py-16 md:py-24 transition-colors duration-300">
+      <section className="relative overflow-hidden bg-background py-16 transition-colors duration-300 md:py-24">
         <div className="theme-grid-overlay" aria-hidden="true" />
         <div className="container-custom relative z-10">
           <div className="mx-auto max-w-3xl text-center">
@@ -16,17 +16,17 @@ export default function BlogLoading() {
       </section>
 
       {/* Blog Cards Grid Skeleton */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="bg-background py-16 md:py-24">
         <div className="container-custom">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {[...Array(6)].map((_, i) => (
               <div
                 key={i}
-                className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-md p-6"
+                className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-md"
               >
                 {/* Image Placeholder */}
-                <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-muted animate-pulse">
-                  <Skeleton className="absolute inset-0 w-full h-full" />
+                <div className="relative aspect-[4/3] animate-pulse overflow-hidden rounded-xl bg-muted">
+                  <Skeleton className="absolute inset-0 h-full w-full" />
                 </div>
 
                 {/* Content Block */}
@@ -38,13 +38,13 @@ export default function BlogLoading() {
                   </div>
 
                   {/* Title & Excerpt */}
-                  <Skeleton className="h-6 w-11/12 mb-3" />
-                  <Skeleton className="h-4 w-full mb-2" />
-                  <Skeleton className="h-4 w-full mb-2" />
-                  <Skeleton className="h-4 w-2/3 mb-6" />
+                  <Skeleton className="mb-3 h-6 w-11/12" />
+                  <Skeleton className="mb-2 h-4 w-full" />
+                  <Skeleton className="mb-2 h-4 w-full" />
+                  <Skeleton className="mb-6 h-4 w-2/3" />
 
                   {/* Read More Link */}
-                  <Skeleton className="h-4 w-24 mt-auto" />
+                  <Skeleton className="mt-auto h-4 w-24" />
                 </div>
               </div>
             ))}

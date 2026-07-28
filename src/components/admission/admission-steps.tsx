@@ -49,9 +49,17 @@ export function AdmissionSteps({ steps }: AdmissionStepsProps) {
             <div className="space-y-8 md:space-y-12">
               {steps.map((step, index) => {
                 const stepAccents = [
-                  { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20' },
+                  {
+                    bg: 'bg-emerald-500/10',
+                    text: 'text-emerald-400',
+                    border: 'border-emerald-500/20',
+                  },
                   { bg: 'bg-sky-500/10', text: 'text-sky-400', border: 'border-sky-500/20' },
-                  { bg: 'bg-violet-500/10', text: 'text-violet-400', border: 'border-violet-500/20' },
+                  {
+                    bg: 'bg-violet-500/10',
+                    text: 'text-violet-400',
+                    border: 'border-violet-500/20',
+                  },
                   { bg: 'bg-amber-500/10', text: 'text-amber-400', border: 'border-amber-500/20' },
                   { bg: 'bg-rose-500/10', text: 'text-rose-400', border: 'border-rose-500/20' },
                 ];
@@ -64,9 +72,7 @@ export function AdmissionSteps({ steps }: AdmissionStepsProps) {
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                     className={`relative flex items-start gap-6 md:gap-0 ${
-                      index % 2 === 0
-                        ? 'md:flex-row'
-                        : 'md:flex-row-reverse md:text-right'
+                      index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse md:text-right'
                     }`}
                   >
                     {/* Step Number (Mobile) */}
@@ -84,12 +90,8 @@ export function AdmissionSteps({ steps }: AdmissionStepsProps) {
                           index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'
                         }`}
                       >
-                        <h3 className="mb-2 text-lg font-semibold text-foreground">
-                          {step.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground">
-                          {step.description}
-                        </p>
+                        <h3 className="mb-2 text-lg font-semibold text-foreground">{step.title}</h3>
+                        <p className="text-sm text-muted-foreground">{step.description}</p>
                       </div>
                     </div>
 

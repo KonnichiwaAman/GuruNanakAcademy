@@ -30,15 +30,33 @@ jest.mock('next/image', () => ({
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, ...props }: React.PropsWithChildren<object>) => <div {...props}>{children}</div>,
-    section: ({ children, ...props }: React.PropsWithChildren<object>) => <section {...props}>{children}</section>,
-    span: ({ children, ...props }: React.PropsWithChildren<object>) => <span {...props}>{children}</span>,
-    button: ({ children, ...props }: React.PropsWithChildren<object>) => <button {...props}>{children}</button>,
-    nav: ({ children, ...props }: React.PropsWithChildren<object>) => <nav {...props}>{children}</nav>,
-    header: ({ children, ...props }: React.PropsWithChildren<object>) => <header {...props}>{children}</header>,
-    footer: ({ children, ...props }: React.PropsWithChildren<object>) => <footer {...props}>{children}</footer>,
-    article: ({ children, ...props }: React.PropsWithChildren<object>) => <article {...props}>{children}</article>,
-    aside: ({ children, ...props }: React.PropsWithChildren<object>) => <aside {...props}>{children}</aside>,
+    div: ({ children, ...props }: React.PropsWithChildren<object>) => (
+      <div {...props}>{children}</div>
+    ),
+    section: ({ children, ...props }: React.PropsWithChildren<object>) => (
+      <section {...props}>{children}</section>
+    ),
+    span: ({ children, ...props }: React.PropsWithChildren<object>) => (
+      <span {...props}>{children}</span>
+    ),
+    button: ({ children, ...props }: React.PropsWithChildren<object>) => (
+      <button {...props}>{children}</button>
+    ),
+    nav: ({ children, ...props }: React.PropsWithChildren<object>) => (
+      <nav {...props}>{children}</nav>
+    ),
+    header: ({ children, ...props }: React.PropsWithChildren<object>) => (
+      <header {...props}>{children}</header>
+    ),
+    footer: ({ children, ...props }: React.PropsWithChildren<object>) => (
+      <footer {...props}>{children}</footer>
+    ),
+    article: ({ children, ...props }: React.PropsWithChildren<object>) => (
+      <article {...props}>{children}</article>
+    ),
+    aside: ({ children, ...props }: React.PropsWithChildren<object>) => (
+      <aside {...props}>{children}</aside>
+    ),
     ul: ({ children, ...props }: React.PropsWithChildren<object>) => <ul {...props}>{children}</ul>,
     li: ({ children, ...props }: React.PropsWithChildren<object>) => <li {...props}>{children}</li>,
     a: ({ children, ...props }: React.PropsWithChildren<object>) => <a {...props}>{children}</a>,
@@ -72,8 +90,7 @@ beforeAll(() => {
   console.error = (...args: unknown[]) => {
     if (
       typeof args[0] === 'string' &&
-      (args[0].includes('Warning: ReactDOM.render') ||
-        args[0].includes('Warning: An update to'))
+      (args[0].includes('Warning: ReactDOM.render') || args[0].includes('Warning: An update to'))
     ) {
       return;
     }

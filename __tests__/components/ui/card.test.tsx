@@ -1,6 +1,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '@/components/ui/card';
 
 describe('Card Components', () => {
   describe('Card', () => {
@@ -18,7 +25,11 @@ describe('Card Components', () => {
     });
 
     it('applies custom className', () => {
-      render(<Card className="custom-card" data-testid="card">Content</Card>);
+      render(
+        <Card className="custom-card" data-testid="card">
+          Content
+        </Card>
+      );
       const card = screen.getByTestId('card');
       expect(card).toHaveClass('custom-card');
     });

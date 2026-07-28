@@ -10,7 +10,8 @@ export const metadata: Metadata = {
   description: `Explore boarding and day-boarding facilities at ${SCHOOL_INFO.name}. Safe, nurturing environment for students with modern amenities.`,
   openGraph: {
     title: `Boarding Facilities | ${SCHOOL_INFO.name}`,
-    description: 'Discover our boarding and day-boarding facilities designed for holistic student development.',
+    description:
+      'Discover our boarding and day-boarding facilities designed for holistic student development.',
     url: '/boarding',
   },
   alternates: {
@@ -22,7 +23,8 @@ const boardingFeatures = [
   {
     icon: Shield,
     title: 'Safe Environment',
-    description: 'Trained staff including housemistress and housemaster ensure student safety 24/7.',
+    description:
+      'Trained staff including housemistress and housemaster ensure student safety 24/7.',
   },
   {
     icon: Users,
@@ -37,7 +39,8 @@ const boardingFeatures = [
   {
     icon: Clock,
     title: 'Time Management',
-    description: 'Structured routine helping students develop discipline and time management skills.',
+    description:
+      'Structured routine helping students develop discipline and time management skills.',
   },
 ];
 
@@ -67,29 +70,35 @@ export default function BoardingPage() {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-background py-20 md:py-28 transition-colors duration-300">
+      <section className="relative overflow-hidden bg-background py-20 transition-colors duration-300 md:py-28">
         <div className="theme-grid-overlay" aria-hidden="true" />
         <div
-          className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[700px] rounded-full blur-[100px]"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px]"
           style={{ background: 'var(--radial-glow)' }}
           aria-hidden="true"
         />
         <div className="container-custom relative z-10">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border/60 dark:border-white/10 bg-secondary/50 dark:bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground dark:text-white/60 backdrop-blur-md">
-              <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/40 dark:bg-white/40" aria-hidden="true" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/50 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground backdrop-blur-md dark:border-white/10 dark:bg-white/5 dark:text-white/60">
+              <span
+                className="h-1.5 w-1.5 rounded-full bg-muted-foreground/40 dark:bg-white/40"
+                aria-hidden="true"
+              />
               Home Away From Home
             </span>
             <h1 className="mt-5 text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
               Boarding Facilities
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              Our boarding facilities provide a safe, nurturing environment where
-              students can live, learn, and grow together as part of our school
-              family.
+              Our boarding facilities provide a safe, nurturing environment where students can live,
+              learn, and grow together as part of our school family.
             </p>
             <div className="mt-8">
-              <Button asChild size="lg" className="bg-primary text-primary-foreground hover:opacity-90 shadow-md border-0 font-medium">
+              <Button
+                asChild
+                size="lg"
+                className="border-0 bg-primary font-medium text-primary-foreground shadow-md hover:opacity-90"
+              >
                 <Link href="/admission/form">
                   Apply Now
                   <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
@@ -118,7 +127,9 @@ export default function BoardingPage() {
                   key={feature.title}
                   className="flex flex-col bg-card p-8 transition-colors hover:bg-muted/50"
                 >
-                  <div className={`mb-5 flex h-10 w-10 items-center justify-center rounded-xl ${a.bg}`}>
+                  <div
+                    className={`mb-5 flex h-10 w-10 items-center justify-center rounded-xl ${a.bg}`}
+                  >
                     <Icon className={`h-5 w-5 ${a.icon}`} aria-hidden="true" />
                   </div>
                   <h3 className="text-base font-semibold tracking-tight text-foreground">
@@ -162,16 +173,14 @@ export default function BoardingPage() {
                 Boarding Facility
               </h2>
               <p className="mt-4 text-muted-foreground">
-                The boarding provides residential facilities for boys only, on
-                campus for classes IV to VIII. All the hostel rooms are well
-                equipped with facilities that help the children live and grow in
-                an environment that they can identify as their home.
+                The boarding provides residential facilities for boys only, on campus for classes IV
+                to VIII. All the hostel rooms are well equipped with facilities that help the
+                children live and grow in an environment that they can identify as their home.
               </p>
               <p className="mt-4 text-muted-foreground">
-                The hostel life infuses confidence and makes a child independent,
-                helping him grow physically, emotionally, socially and
-                psychologically. It provides an opportunity where you make friends
-                for life.
+                The hostel life infuses confidence and makes a child independent, helping him grow
+                physically, emotionally, socially and psychologically. It provides an opportunity
+                where you make friends for life.
               </p>
 
               <ul className="mt-6 space-y-3">
@@ -212,15 +221,13 @@ export default function BoardingPage() {
                 Day-Boarding Facility
               </h2>
               <p className="mt-4 text-muted-foreground">
-                The day boarding facility is open to girls and boys from classes
-                IV to XII. This provides study through the school hours including
-                a mid-morning fruit break, followed by a nutritious lunch break
-                after school gives over.
+                The day boarding facility is open to girls and boys from classes IV to XII. This
+                provides study through the school hours including a mid-morning fruit break,
+                followed by a nutritious lunch break after school gives over.
               </p>
               <p className="mt-4 text-muted-foreground">
-                Students benefit from tutorial sessions, a tea-break, and
-                activity time until 5 PM (Monday to Friday), making it an
-                extended and enriching school day experience.
+                Students benefit from tutorial sessions, a tea-break, and activity time until 5 PM
+                (Monday to Friday), making it an extended and enriching school day experience.
               </p>
 
               <ul className="mt-6 space-y-3">
@@ -256,20 +263,26 @@ export default function BoardingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative overflow-hidden bg-purple-50/30 dark:bg-zinc-950 border-t border-purple-200/20 dark:border-white/5 py-16 md:py-24 transition-colors duration-300">
+      <section className="relative overflow-hidden border-t border-purple-200/20 bg-purple-50/30 py-16 transition-colors duration-300 dark:border-white/5 dark:bg-zinc-950 md:py-24">
         <div className="theme-grid-overlay" aria-hidden="true" />
         <div className="container-custom relative z-10 text-center">
-          <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Why Board With Us</p>
+          <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+            Why Board With Us
+          </p>
           <h2 className="mt-3 text-2xl font-bold text-foreground md:text-4xl">
             Give Your Child the Best Start
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Boarders discover that they have much more time to study and pursue
-            their wider interests. No time is wasted in travelling – learn Sport,
-            Art, Music, Drama and also benefit from Career Guidance lectures.
+            Boarders discover that they have much more time to study and pursue their wider
+            interests. No time is wasted in travelling – learn Sport, Art, Music, Drama and also
+            benefit from Career Guidance lectures.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:opacity-90 shadow-md font-medium border-0">
+            <Button
+              asChild
+              size="lg"
+              className="border-0 bg-primary font-medium text-primary-foreground shadow-md hover:opacity-90"
+            >
               <Link href="/admission/form">Apply Now</Link>
             </Button>
             <Button asChild size="lg" variant="outline">

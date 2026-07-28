@@ -26,32 +26,35 @@ export default async function BlogPage() {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-background py-16 md:py-24 transition-colors duration-300">
+      <section className="relative overflow-hidden bg-background py-16 transition-colors duration-300 md:py-24">
         <div className="theme-grid-overlay" aria-hidden="true" />
         <div
-          className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[700px] rounded-full blur-[100px]"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px]"
           style={{ background: 'var(--radial-glow)' }}
           aria-hidden="true"
         />
         <div className="container-custom relative z-10">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border/60 dark:border-white/10 bg-secondary/50 dark:bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground dark:text-white/60 backdrop-blur-md">
-              <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/40 dark:bg-white/40" aria-hidden="true" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/50 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground backdrop-blur-md dark:border-white/10 dark:bg-white/5 dark:text-white/60">
+              <span
+                className="h-1.5 w-1.5 rounded-full bg-muted-foreground/40 dark:bg-white/40"
+                aria-hidden="true"
+              />
               News &amp; Updates
             </span>
             <h1 className="mt-5 text-3xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
               Our Blog
             </h1>
             <p className="mt-5 text-base text-muted-foreground md:text-lg">
-              Stay connected with the latest happenings, achievements, and insights
-              from our school community.
+              Stay connected with the latest happenings, achievements, and insights from our school
+              community.
             </p>
           </div>
         </div>
       </section>
 
       {/* Blog Posts */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="bg-background py-16 md:py-24">
         <div className="container-custom">
           {posts.length > 0 ? (
             <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -78,14 +81,14 @@ export default async function BlogPage() {
                   <article
                     key={post.slug}
                     className={cn(
-                      "group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:shadow-xl hover:-translate-y-1",
+                      'group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-xl',
                       borderHover
                     )}
                   >
                     <Link href={`/blog/${post.slug}`} className="block">
                       <div className="relative aspect-[4/3] overflow-hidden">
                         <PremiumGradientPlaceholder icon={BookOpen} />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                         {post.category && (
                           <Badge
                             variant="secondary"
@@ -114,10 +117,10 @@ export default async function BlogPage() {
                         )}
                       </div>
                       <Link href={`/blog/${post.slug}`} className="block flex-1">
-                        <h2 className="mb-4 text-xl font-bold text-foreground group-hover:text-primary dark:group-hover:text-white transition-colors line-clamp-2">
+                        <h2 className="mb-4 line-clamp-2 text-xl font-bold text-foreground transition-colors group-hover:text-primary dark:group-hover:text-white">
                           {post.title}
                         </h2>
-                        <p className="mb-6 line-clamp-3 text-sm text-muted-foreground leading-relaxed">
+                        <p className="mb-6 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
                           {post.excerpt}
                         </p>
                       </Link>
@@ -126,7 +129,10 @@ export default async function BlogPage() {
                         className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-foreground/60 transition-colors group-hover:text-foreground"
                       >
                         Read More
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                        <ArrowRight
+                          className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                          aria-hidden="true"
+                        />
                       </Link>
                     </div>
                   </article>
@@ -135,9 +141,7 @@ export default async function BlogPage() {
             </div>
           ) : (
             <div className="py-12 text-center">
-              <p className="text-lg text-muted-foreground">
-                No blog posts yet. Check back soon!
-              </p>
+              <p className="text-lg text-muted-foreground">No blog posts yet. Check back soon!</p>
             </div>
           )}
         </div>

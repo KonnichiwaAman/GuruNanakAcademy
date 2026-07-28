@@ -10,7 +10,7 @@ function Skeleton({ className, variant = 'rectangular', ...props }: SkeletonProp
       className={cn(
         'animate-pulse bg-muted',
         variant === 'circular' && 'rounded-full',
-        variant === 'text' && 'rounded h-4 w-full',
+        variant === 'text' && 'h-4 w-full rounded',
         variant === 'rectangular' && 'rounded-lg',
         className
       )}

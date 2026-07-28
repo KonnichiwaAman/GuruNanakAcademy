@@ -84,9 +84,7 @@ export function AdmissionForm() {
     >
       {/* Student Information */}
       <div>
-        <h2 className="mb-6 text-lg font-semibold text-foreground">
-          Student Information
-        </h2>
+        <h2 className="mb-6 text-lg font-semibold text-foreground">Student Information</h2>
         <div className="grid gap-4 md:grid-cols-2">
           <div className="md:col-span-2">
             <Input
@@ -129,9 +127,7 @@ export function AdmissionForm() {
 
       {/* Parent/Guardian Information */}
       <div>
-        <h2 className="mb-6 text-lg font-semibold text-foreground">
-          Parent/Guardian Information
-        </h2>
+        <h2 className="mb-6 text-lg font-semibold text-foreground">Parent/Guardian Information</h2>
         <div className="grid gap-4 md:grid-cols-2">
           <Input
             label="Father's Name"
@@ -215,9 +211,7 @@ export function AdmissionForm() {
 
       {/* Boarding Preference */}
       <div>
-        <h2 className="mb-6 text-lg font-semibold text-foreground">
-          Boarding Preference
-        </h2>
+        <h2 className="mb-6 text-lg font-semibold text-foreground">Boarding Preference</h2>
         <Select
           label="Boarding Requirement"
           options={boardingOptions}
@@ -225,8 +219,8 @@ export function AdmissionForm() {
           error={errors.boardingRequired?.message}
         />
         <p className="mt-2 text-xs text-muted-foreground">
-          Note: Boarding facility is available for boys only (Class IV-VIII).
-          Day-boarding is available for both boys and girls (Class IV-XII).
+          Note: Boarding facility is available for boys only (Class IV-VIII). Day-boarding is
+          available for both boys and girls (Class IV-XII).
         </p>
       </div>
 
@@ -260,12 +254,7 @@ export function AdmissionForm() {
       )}
 
       {/* Submit Button */}
-      <Button
-        type="submit"
-        size="lg"
-        className="w-full"
-        disabled={isSubmitting}
-      >
+      <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
         {isSubmitting ? (
           <>
             <Loader2 className="mr-2 h-5 w-5 animate-spin" aria-hidden="true" />

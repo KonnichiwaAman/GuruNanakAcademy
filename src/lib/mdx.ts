@@ -165,9 +165,7 @@ export function getRecentPosts(limit = 5): BlogPostMeta[] {
  */
 export function getPostsByCategory(category: string): BlogPostMeta[] {
   const posts = getAllPostsMeta();
-  return posts.filter(
-    (post) => post.category?.toLowerCase() === category.toLowerCase()
-  );
+  return posts.filter((post) => post.category?.toLowerCase() === category.toLowerCase());
 }
 
 /**
@@ -175,9 +173,7 @@ export function getPostsByCategory(category: string): BlogPostMeta[] {
  */
 export function getPostsByTag(tag: string): BlogPostMeta[] {
   const posts = getAllPostsMeta();
-  return posts.filter((post) =>
-    post.tags?.some((t) => t.toLowerCase() === tag.toLowerCase())
-  );
+  return posts.filter((post) => post.tags?.some((t) => t.toLowerCase() === tag.toLowerCase()));
 }
 
 /**

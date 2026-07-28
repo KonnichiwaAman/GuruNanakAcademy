@@ -17,10 +17,6 @@ function AnimatedCounter({ value, suffix = '' }: { value: string; suffix?: strin
   useEffect(() => {
     if (!isInView) return;
     const numericValue = parseInt(value.replace(/\D/g, ''));
-    if (isNaN(numericValue)) {
-      setDisplayValue(value);
-      return;
-    }
 
     const duration = 2000;
     const steps = 60;
@@ -40,7 +36,12 @@ function AnimatedCounter({ value, suffix = '' }: { value: string; suffix?: strin
     return () => clearInterval(timer);
   }, [isInView, value]);
 
-  return <span ref={ref}>{displayValue}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {displayValue}
+      {suffix}
+    </span>
+  );
 }
 
 const premiumEase = [0.16, 1, 0.3, 1] as const;
@@ -91,7 +92,6 @@ export function Hero() {
     >
       {/* Sticky viewport — this is what the user sees */}
       <div className="sticky top-0 h-screen min-h-[100svh] overflow-hidden bg-black">
-
         {/* Canvas frame sequence background */}
         <VideoFrameSequence scrollContainerRef={scrollContainerRef} />
 
@@ -113,15 +113,9 @@ export function Hero() {
         >
           <div className="container-custom w-full pb-8 xs:pb-12 md:pb-20 lg:pb-24">
             <div className="max-w-3xl">
-
               {/* Admissions pill — understated, refined */}
-              <motion.div
-                custom={0}
-                initial="hidden"
-                animate="visible"
-                variants={textVariants}
-              >
-                <span className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-wider xs:tracking-widest text-white/80 backdrop-blur-md">
+              <motion.div custom={0} initial="hidden" animate="visible" variants={textVariants}>
+                <span className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-white/80 backdrop-blur-md xs:tracking-widest">
                   <span className="h-1.5 w-1.5 rounded-full bg-white/60" aria-hidden="true" />
                   Admissions Open 2026–27
                 </span>
@@ -146,9 +140,8 @@ export function Hero() {
                 variants={textVariants}
                 className="mt-4 max-w-xl text-sm leading-relaxed text-white/70 xs:text-base md:text-lg"
               >
-                {SCHOOL_INFO.tagline}. Nurturing minds and building character
-                since {SCHOOL_INFO.founded} on our {SCHOOL_INFO.campusSize}{' '}
-                campus in Dehradun.
+                {SCHOOL_INFO.tagline}. Nurturing minds and building character since{' '}
+                {SCHOOL_INFO.founded} on our {SCHOOL_INFO.campusSize} campus in Dehradun.
               </motion.p>
 
               {/* CTA Buttons — clean, no glow effects */}
@@ -162,7 +155,7 @@ export function Hero() {
                 <Button
                   asChild
                   size="xl"
-                  className="group bg-white text-black hover:bg-white/90 border-0 font-medium w-full h-12 text-base px-6 sm:h-14 sm:text-lg sm:px-8 sm:w-auto"
+                  className="group h-12 w-full border-0 bg-white px-6 text-base font-medium text-black hover:bg-white/90 sm:h-14 sm:w-auto sm:px-8 sm:text-lg"
                 >
                   <Link href="/admission/form">
                     Apply for Admission
@@ -176,13 +169,10 @@ export function Hero() {
                   asChild
                   variant="outline"
                   size="xl"
-                  className="group border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white backdrop-blur-sm w-full h-12 text-base px-6 sm:h-14 sm:text-lg sm:px-8 sm:w-auto"
+                  className="group h-12 w-full border-white/20 bg-white/5 px-6 text-base text-white backdrop-blur-sm hover:bg-white/10 hover:text-white sm:h-14 sm:w-auto sm:px-8 sm:text-lg"
                 >
                   <Link href="/pay-fee">
-                    <CreditCard
-                      className="mr-2 h-4 w-4 opacity-70"
-                      aria-hidden="true"
-                    />
+                    <CreditCard className="mr-2 h-4 w-4 opacity-70" aria-hidden="true" />
                     Pay Fee
                   </Link>
                 </Button>
@@ -194,7 +184,7 @@ export function Hero() {
                 initial="hidden"
                 animate="visible"
                 variants={textVariants}
-                className="mt-6 grid grid-cols-2 gap-y-4 gap-x-6 xs:flex xs:flex-wrap xs:items-center xs:gap-6 md:gap-8"
+                className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4 xs:flex xs:flex-wrap xs:items-center xs:gap-6 md:gap-8"
               >
                 {[
                   { value: '13', suffix: ' Acres', label: 'Campus' },
@@ -221,12 +211,14 @@ export function Hero() {
                       {stat.label}
                     </span>
                     {i < 3 && (
-                      <span className="ml-4 hidden h-5 w-px bg-white/15 xs:block" aria-hidden="true" />
+                      <span
+                        className="ml-4 hidden h-5 w-px bg-white/15 xs:block"
+                        aria-hidden="true"
+                      />
                     )}
                   </motion.div>
                 ))}
               </motion.div>
-
             </div>
           </div>
         </motion.div>
@@ -244,9 +236,7 @@ export function Hero() {
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <span className="text-[10px] uppercase tracking-[0.2em] text-white/40">
-              Scroll
-            </span>
+            <span className="text-[10px] uppercase tracking-[0.2em] text-white/40">Scroll</span>
             <div className="h-8 w-px bg-gradient-to-b from-white/40 to-transparent" />
           </motion.div>
         </motion.div>

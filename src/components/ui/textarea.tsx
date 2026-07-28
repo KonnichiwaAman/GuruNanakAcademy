@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 
-export interface TextareaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   error?: string;
   helperText?: string;
@@ -16,10 +15,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className="w-full">
         {label && (
-          <label
-            htmlFor={textareaId}
-            className="mb-2 block text-sm font-medium text-foreground"
-          >
+          <label htmlFor={textareaId} className="mb-2 block text-sm font-medium text-foreground">
             {label}
             {props.required && (
               <span className="ml-1 text-red-500" aria-hidden="true">
@@ -47,19 +43,12 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           {...props}
         />
         {error && (
-          <p
-            id={`${textareaId}-error`}
-            className="mt-1.5 text-sm text-red-500"
-            role="alert"
-          >
+          <p id={`${textareaId}-error`} className="mt-1.5 text-sm text-red-500" role="alert">
             {error}
           </p>
         )}
         {helperText && !error && (
-          <p
-            id={`${textareaId}-helper`}
-            className="mt-1.5 text-sm text-muted-foreground"
-          >
+          <p id={`${textareaId}-helper`} className="mt-1.5 text-sm text-muted-foreground">
             {helperText}
           </p>
         )}

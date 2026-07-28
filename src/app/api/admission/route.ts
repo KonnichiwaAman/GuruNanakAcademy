@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
     //   html: `
     //     <h2>Thank You for Your Application</h2>
     //     <p>Dear ${formData.fatherName} / ${formData.motherName},</p>
-    //     <p>We have received the admission application for <strong>${formData.studentName}</strong> 
+    //     <p>We have received the admission application for <strong>${formData.studentName}</strong>
     //        for Class <strong>${formData.classOfAdmission}</strong>.</p>
     //     <p>Our admissions team will review the application and contact you shortly.</p>
     //     <p>Best regards,<br>Admissions Team<br>Guru Nanak Academy</p>

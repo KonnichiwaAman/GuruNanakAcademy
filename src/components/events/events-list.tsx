@@ -28,10 +28,10 @@ export function EventsList() {
             key={category}
             onClick={() => setSelectedCategory(category)}
             className={cn(
-              'rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 border',
+              'rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200',
               selectedCategory === category
-                ? 'bg-primary/10 border-primary/30 text-primary shadow-lg'
-                : 'bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground border-border'
+                ? 'border-primary/30 bg-primary/10 text-primary shadow-lg'
+                : 'border-border bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground'
             )}
           >
             {category}
@@ -56,7 +56,7 @@ export function EventsList() {
               <article
                 key={event.id}
                 className={cn(
-                  "group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:shadow-lg",
+                  'group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:shadow-lg',
                   borderHover
                 )}
               >
@@ -76,10 +76,10 @@ export function EventsList() {
                       {event.date}
                     </span>
                   </div>
-                  <h3 className="mb-2 text-lg font-semibold text-foreground group-hover:text-primary dark:group-hover:text-white transition-colors">
+                  <h3 className="mb-2 text-lg font-semibold text-foreground transition-colors group-hover:text-primary dark:group-hover:text-white">
                     {event.title}
                   </h3>
-                  <p className="mb-4 line-clamp-2 text-sm text-muted-foreground leading-relaxed">
+                  <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
                     {event.excerpt}
                   </p>
                   <Link
@@ -87,7 +87,10 @@ export function EventsList() {
                     className="inline-flex items-center gap-1 text-sm font-medium text-foreground/60 transition-colors group-hover:text-foreground"
                   >
                     Read More
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                    <ArrowRight
+                      className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                      aria-hidden="true"
+                    />
                   </Link>
                 </div>
               </article>
@@ -96,14 +99,8 @@ export function EventsList() {
         </div>
       ) : (
         <div className="py-12 text-center">
-          <p className="text-muted-foreground">
-            No events found in this category.
-          </p>
-          <Button
-            variant="outline"
-            onClick={() => setSelectedCategory('All')}
-            className="mt-4"
-          >
+          <p className="text-muted-foreground">No events found in this category.</p>
+          <Button variant="outline" onClick={() => setSelectedCategory('All')} className="mt-4">
             View All Events
           </Button>
         </div>

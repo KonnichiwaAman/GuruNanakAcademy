@@ -53,7 +53,7 @@ export function LabCards() {
       <div className="container-custom">
         {/* Header — editorial split layout */}
         <motion.div
-          className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:mb-16"
+          className="mb-12 flex flex-col gap-4 md:mb-16 md:flex-row md:items-end md:justify-between"
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease }}
@@ -79,17 +79,14 @@ export function LabCards() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: true, margin: '-60px' }}
           className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
         >
           {LABS.map((lab, i) => {
             const Icon = lab.icon;
             const accent = labAccents[i % labAccents.length];
             return (
-              <motion.div
-                key={lab.id}
-                variants={cardVariants}
-              >
+              <motion.div key={lab.id} variants={cardVariants}>
                 <Link
                   href={`/facilities#${lab.id}`}
                   className={cn(
@@ -106,7 +103,12 @@ export function LabCards() {
                       <span className="text-xs font-medium tabular-nums text-muted-foreground/40">
                         0{i + 1}
                       </span>
-                      <div className={cn('flex h-9 w-9 items-center justify-center rounded-lg', accent.bg)}>
+                      <div
+                        className={cn(
+                          'flex h-9 w-9 items-center justify-center rounded-lg',
+                          accent.bg
+                        )}
+                      >
                         <Icon className={cn('h-4.5 w-4.5', accent.icon)} aria-hidden="true" />
                       </div>
                     </div>
@@ -117,14 +119,17 @@ export function LabCards() {
                     </h3>
 
                     {/* Description */}
-                    <p className="mb-5 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+                    <p className="mb-5 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                       {lab.description}
                     </p>
 
                     {/* Link */}
                     <span className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors duration-200 group-hover:text-foreground">
                       Explore lab
-                      <ArrowRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
+                      <ArrowRight
+                        className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5"
+                        aria-hidden="true"
+                      />
                     </span>
                   </div>
                 </Link>

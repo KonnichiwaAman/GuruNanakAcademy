@@ -60,22 +60,13 @@ export function CookieConsent() {
                 <Cookie className="h-5 w-5 text-primary" aria-hidden="true" />
               </div>
               <div>
-                <h3
-                  id="cookie-title"
-                  className="text-base font-semibold text-foreground"
-                >
+                <h3 id="cookie-title" className="text-base font-semibold text-foreground">
                   Cookie Notice
                 </h3>
-                <p
-                  id="cookie-description"
-                  className="mt-1 text-sm text-muted-foreground"
-                >
-                  We use cookies to enhance your experience. By continuing to
-                  visit this site you agree to our use of cookies.{' '}
-                  <Link
-                    href="/privacy"
-                    className="text-primary underline-offset-4 hover:underline"
-                  >
+                <p id="cookie-description" className="mt-1 text-sm text-muted-foreground">
+                  We use cookies to enhance your experience. By continuing to visit this site you
+                  agree to our use of cookies.{' '}
+                  <Link href="/privacy" className="text-primary underline-offset-4 hover:underline">
                     Learn more
                   </Link>
                 </p>

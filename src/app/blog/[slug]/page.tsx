@@ -20,70 +20,84 @@ function MarkdownParser({ content }: { content: string }) {
   let inBlockquote = false;
   let blockquoteLines: string[] = [];
 
-  const flushList = (key: number) => {
-    if (!currentList) return null;
-    const ListTag = currentList.type;
-    const el = (
-      <ListTag key={`list-${key}`} className={currentList.type === 'ul' ? 'list-disc pl-5 my-4 space-y-1' : 'list-decimal pl-5 my-4 space-y-1'}>
-        {currentList.items.map((item, idx) => (
+  const renderList = (list: { type: 'ul' | 'ol'; items: string[] }, key: number) => {
+    const ListTag = list.type;
+    return (
+      <ListTag
+        key={`list-${key}`}
+        className={
+          list.type === 'ul' ? 'my-4 list-disc space-y-1 pl-5' : 'my-4 list-decimal space-y-1 pl-5'
+        }
+      >
+        {list.items.map((item, idx) => (
           <li key={idx} dangerouslySetInnerHTML={{ __html: formatInline(item) }} />
         ))}
       </ListTag>
     );
-    currentList = null;
-    return el;
   };
 
-  const flushTable = (key: number) => {
-    if (!currentTable) return null;
-    const el = (
-      <div key={`table-wrapper-${key}`} className="overflow-x-auto my-6 border border-border rounded-lg shadow-sm">
-        <table className="min-w-full divide-y divide-border text-sm">
-          <thead className="bg-muted/50">
-            <tr>
-              {currentTable.headers.map((h, idx) => (
-                <th key={idx} className="px-4 py-3 text-left font-semibold text-foreground border-b border-border">
-                  {h}
-                </th>
+  const renderTable = (table: { headers: string[]; rows: string[][] }, key: number) => (
+    <div
+      key={`table-wrapper-${key}`}
+      className="my-6 overflow-x-auto rounded-lg border border-border shadow-sm"
+    >
+      <table className="min-w-full divide-y divide-border text-sm">
+        <thead className="bg-muted/50">
+          <tr>
+            {table.headers.map((h, idx) => (
+              <th
+                key={idx}
+                className="border-b border-border px-4 py-3 text-left font-semibold text-foreground"
+              >
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-border bg-card">
+          {table.rows.map((row, rIdx) => (
+            <tr key={rIdx} className="hover:bg-muted/30">
+              {row.map((cell, cIdx) => (
+                <td
+                  key={cIdx}
+                  className="px-4 py-3 text-muted-foreground"
+                  dangerouslySetInnerHTML={{ __html: formatInline(cell) }}
+                />
               ))}
             </tr>
-          </thead>
-          <tbody className="divide-y divide-border bg-card">
-            {currentTable.rows.map((row, rIdx) => (
-              <tr key={rIdx} className="hover:bg-muted/30">
-                {row.map((cell, cIdx) => (
-                  <td key={cIdx} className="px-4 py-3 text-muted-foreground" dangerouslySetInnerHTML={{ __html: formatInline(cell) }} />
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-    currentTable = null;
-    return el;
-  };
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 
-  const flushBlockquote = (key: number) => {
-    if (!inBlockquote) return null;
-    const el = (
-      <blockquote key={`quote-${key}`} className="border-l-4 border-primary pl-4 py-2 my-4 italic text-muted-foreground bg-muted/20 rounded-r-lg">
-        {blockquoteLines.map((line, idx) => (
-          <p key={idx} className="mb-2 last:mb-0" dangerouslySetInnerHTML={{ __html: formatInline(line) }} />
-        ))}
-      </blockquote>
-    );
-    inBlockquote = false;
-    blockquoteLines = [];
-    return el;
-  };
+  const renderBlockquote = (lines: string[], key: number) => (
+    <blockquote
+      key={`quote-${key}`}
+      className="my-4 rounded-r-lg border-l-4 border-primary bg-muted/20 py-2 pl-4 italic text-muted-foreground"
+    >
+      {lines.map((line, idx) => (
+        <p
+          key={idx}
+          className="mb-2 last:mb-0"
+          dangerouslySetInnerHTML={{ __html: formatInline(line) }}
+        />
+      ))}
+    </blockquote>
+  );
 
   const formatInline = (text: string) => {
     return text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      .replace(/`(.*?)`/g, '<code class="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-primary">$1</code>')
-      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-primary underline hover:text-primary/80">$1</a>');
+      .replace(
+        /`(.*?)`/g,
+        '<code class="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-primary">$1</code>'
+      )
+      .replace(
+        /\[(.*?)\]\((.*?)\)/g,
+        '<a href="$2" class="text-primary underline hover:text-primary/80">$1</a>'
+      );
   };
 
   let keyCounter = 0;
@@ -97,7 +111,10 @@ function MarkdownParser({ content }: { content: string }) {
     }
 
     if (line.startsWith('|') && line.endsWith('|')) {
-      const cells = line.split('|').map(c => c.trim()).filter((_, idx, arr) => idx > 0 && idx < arr.length - 1);
+      const cells = line
+        .split('|')
+        .map((c) => c.trim())
+        .filter((_, idx, arr) => idx > 0 && idx < arr.length - 1);
       if (!currentTable) {
         currentTable = { headers: cells, rows: [] };
       } else {
@@ -105,8 +122,8 @@ function MarkdownParser({ content }: { content: string }) {
       }
       continue;
     } else if (currentTable) {
-      const el = flushTable(keyCounter);
-      if (el) elements.push(el);
+      elements.push(renderTable(currentTable, keyCounter));
+      currentTable = null;
     }
 
     if (line.startsWith('- ') || line.startsWith('* ')) {
@@ -114,8 +131,7 @@ function MarkdownParser({ content }: { content: string }) {
       if (!currentList) {
         currentList = { type: 'ul', items: [item] };
       } else if (currentList.type === 'ol') {
-        const el = flushList(keyCounter);
-        if (el) elements.push(el);
+        elements.push(renderList(currentList, keyCounter));
         currentList = { type: 'ul', items: [item] };
       } else {
         currentList.items.push(item);
@@ -129,8 +145,7 @@ function MarkdownParser({ content }: { content: string }) {
       if (!currentList) {
         currentList = { type: 'ol', items: [item] };
       } else if (currentList.type === 'ul') {
-        const el = flushList(keyCounter);
-        if (el) elements.push(el);
+        elements.push(renderList(currentList, keyCounter));
         currentList = { type: 'ol', items: [item] };
       } else {
         currentList.items.push(item);
@@ -139,8 +154,8 @@ function MarkdownParser({ content }: { content: string }) {
     }
 
     if (currentList && line === '') {
-      const el = flushList(keyCounter);
-      if (el) elements.push(el);
+      elements.push(renderList(currentList, keyCounter));
+      currentList = null;
     }
 
     if (line.startsWith('>') || line.startsWith('»')) {
@@ -152,42 +167,68 @@ function MarkdownParser({ content }: { content: string }) {
       blockquoteLines.push(line);
       continue;
     } else if (inBlockquote && line === '') {
-      const el = flushBlockquote(keyCounter);
-      if (el) elements.push(el);
+      elements.push(renderBlockquote(blockquoteLines, keyCounter));
+      inBlockquote = false;
+      blockquoteLines = [];
     }
 
     if (line === '') continue;
 
     if (line.startsWith('###### ')) {
-      elements.push(<h6 key={keyCounter} className="text-sm font-bold my-4">{formatInline(line.substring(7))}</h6>);
+      elements.push(
+        <h6 key={keyCounter} className="my-4 text-sm font-bold">
+          {formatInline(line.substring(7))}
+        </h6>
+      );
     } else if (line.startsWith('##### ')) {
-      elements.push(<h5 key={keyCounter} className="text-base font-bold my-4">{formatInline(line.substring(6))}</h5>);
+      elements.push(
+        <h5 key={keyCounter} className="my-4 text-base font-bold">
+          {formatInline(line.substring(6))}
+        </h5>
+      );
     } else if (line.startsWith('#### ')) {
-      elements.push(<h4 key={keyCounter} className="text-lg font-bold my-4">{formatInline(line.substring(5))}</h4>);
+      elements.push(
+        <h4 key={keyCounter} className="my-4 text-lg font-bold">
+          {formatInline(line.substring(5))}
+        </h4>
+      );
     } else if (line.startsWith('### ')) {
-      elements.push(<h3 key={keyCounter} className="text-xl font-bold my-4">{formatInline(line.substring(4))}</h3>);
+      elements.push(
+        <h3 key={keyCounter} className="my-4 text-xl font-bold">
+          {formatInline(line.substring(4))}
+        </h3>
+      );
     } else if (line.startsWith('## ')) {
-      elements.push(<h2 key={keyCounter} className="text-2xl font-bold my-4">{formatInline(line.substring(3))}</h2>);
+      elements.push(
+        <h2 key={keyCounter} className="my-4 text-2xl font-bold">
+          {formatInline(line.substring(3))}
+        </h2>
+      );
     } else if (line.startsWith('# ')) {
-      elements.push(<h1 key={keyCounter} className="text-3xl font-bold my-4">{formatInline(line.substring(2))}</h1>);
+      elements.push(
+        <h1 key={keyCounter} className="my-4 text-3xl font-bold">
+          {formatInline(line.substring(2))}
+        </h1>
+      );
     } else {
       elements.push(
-        <p key={keyCounter} className="mb-4 text-muted-foreground leading-relaxed" dangerouslySetInnerHTML={{ __html: formatInline(line) }} />
+        <p
+          key={keyCounter}
+          className="mb-4 leading-relaxed text-muted-foreground"
+          dangerouslySetInnerHTML={{ __html: formatInline(line) }}
+        />
       );
     }
   }
 
   if (currentList) {
-    const el = flushList(keyCounter);
-    if (el) elements.push(el);
+    elements.push(renderList(currentList, keyCounter));
   }
   if (currentTable) {
-    const el = flushTable(keyCounter);
-    if (el) elements.push(el);
+    elements.push(renderTable(currentTable, keyCounter));
   }
   if (inBlockquote) {
-    const el = flushBlockquote(keyCounter);
-    if (el) elements.push(el);
+    elements.push(renderBlockquote(blockquoteLines, keyCounter));
   }
 
   return <>{elements}</>;
@@ -244,11 +285,11 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <div className="pt-20">
       {/* Back Navigation */}
-      <div className="border-b border-purple-200/20 dark:border-white/5 bg-purple-50/40 dark:bg-zinc-950/80 backdrop-blur-md transition-colors duration-300">
+      <div className="border-b border-purple-200/20 bg-purple-50/40 backdrop-blur-md transition-colors duration-300 dark:border-white/5 dark:bg-zinc-950/80">
         <div className="container-custom py-4">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             Back to Blog
@@ -258,24 +299,27 @@ export default async function BlogPostPage({ params }: Props) {
 
       <article>
         {/* Header */}
-        <header className="relative overflow-hidden bg-background border-b border-border/60 py-12 md:py-16 transition-colors duration-300">
+        <header className="relative overflow-hidden border-b border-border/60 bg-background py-12 transition-colors duration-300 md:py-16">
           <div className="theme-grid-overlay" aria-hidden="true" />
           <div
-            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[400px] w-[600px] rounded-full blur-[100px]"
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px]"
             style={{ background: 'var(--radial-glow)' }}
             aria-hidden="true"
           />
           <div className="container-custom relative z-10">
             <div className="mx-auto max-w-3xl">
               {post.category && (
-                <Badge variant="secondary" className="mb-4 border-border/60 dark:border-white/5 bg-secondary/50 dark:bg-white/10 text-foreground dark:text-white backdrop-blur-md">
+                <Badge
+                  variant="secondary"
+                  className="mb-4 border-border/60 bg-secondary/50 text-foreground backdrop-blur-md dark:border-white/5 dark:bg-white/10 dark:text-white"
+                >
                   {post.category}
                 </Badge>
               )}
               <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl">
                 {post.title}
               </h1>
-              <div className="mt-6 flex flex-wrap gap-6 text-muted-foreground text-sm">
+              <div className="mt-6 flex flex-wrap gap-6 text-sm text-muted-foreground">
                 <span className="flex items-center gap-2">
                   <Calendar className="h-4.5 w-4.5" aria-hidden="true" />
                   {new Date(post.date).toLocaleDateString('en-IN', {
@@ -307,7 +351,7 @@ export default async function BlogPostPage({ params }: Props) {
         {/* Content */}
         <div className="container-custom py-12 md:py-16">
           <div className="mx-auto max-w-3xl">
-            <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-primary prose-p:leading-relaxed prose-img:rounded-xl prose-img:shadow-lg">
+            <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:font-bold prose-p:leading-relaxed prose-a:text-primary prose-img:rounded-xl prose-img:shadow-lg">
               <MarkdownParser content={post.content} />
             </div>
 
@@ -318,7 +362,7 @@ export default async function BlogPostPage({ params }: Props) {
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full bg-secondary dark:bg-white/5 border border-border dark:border-white/10 px-3 py-1 text-xs font-medium text-muted-foreground dark:text-white/60"
+                    className="rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground dark:border-white/10 dark:bg-white/5 dark:text-white/60"
                   >
                     {tag}
                   </span>
@@ -342,17 +386,15 @@ export default async function BlogPostPage({ params }: Props) {
       {relatedPosts.length > 0 && (
         <section className="section-padding bg-muted/50">
           <div className="container-custom">
-            <h2 className="mb-8 text-heading-lg font-bold text-foreground">
-              Related Posts
-            </h2>
+            <h2 className="mb-8 text-heading-lg font-bold text-foreground">Related Posts</h2>
             <div className="grid gap-8 md:grid-cols-2">
               {relatedPosts.map((relatedPost) => (
                 <Link
                   key={relatedPost.slug}
                   href={`/blog/${relatedPost.slug}`}
-                  className="group flex flex-col sm:flex-row overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                  className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:flex-row"
                 >
-                  <div className="relative aspect-video sm:aspect-square sm:w-48 flex-shrink-0 overflow-hidden">
+                  <div className="relative aspect-video flex-shrink-0 overflow-hidden sm:aspect-square sm:w-48">
                     <PremiumGradientPlaceholder icon={BookOpen} />
                   </div>
                   <div className="flex flex-1 flex-col justify-center p-6">
@@ -364,10 +406,10 @@ export default async function BlogPostPage({ params }: Props) {
                         day: 'numeric',
                       })}
                     </div>
-                    <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                    <h3 className="line-clamp-2 text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
                       {relatedPost.title}
                     </h3>
-                    <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
+                    <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
                       {relatedPost.excerpt}
                     </p>
                   </div>

@@ -10,7 +10,8 @@ export const metadata: Metadata = {
   description: `Discover the co-curricular activities at ${SCHOOL_INFO.name}. Sports, music, dance, art, and various clubs that nurture holistic development.`,
   openGraph: {
     title: `Co-Curricular Activities | ${SCHOOL_INFO.name}`,
-    description: 'Explore our diverse range of co-curricular activities for holistic student development.',
+    description:
+      'Explore our diverse range of co-curricular activities for holistic student development.',
     url: '/co-curricular',
   },
   alternates: {
@@ -35,7 +36,14 @@ const activities = [
       'Express yourself through our music and dance programs. From classical to contemporary, students explore various forms of musical and dance expression under expert guidance.',
     icon: Music,
     image: '/images/girlsbadminton.png',
-    items: ['Classical Music', 'Western Music', 'Folk Dance', 'Contemporary Dance', 'Choir', 'Band'],
+    items: [
+      'Classical Music',
+      'Western Music',
+      'Folk Dance',
+      'Contemporary Dance',
+      'Choir',
+      'Band',
+    ],
   },
   {
     id: 'art',
@@ -81,26 +89,29 @@ export default function CoCurricularPage() {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-background py-20 md:py-32 transition-colors duration-300">
+      <section className="relative overflow-hidden bg-background py-20 transition-colors duration-300 md:py-32">
         <div className="theme-grid-overlay" aria-hidden="true" />
         <div
-          className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[700px] rounded-full blur-[100px]"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[100px]"
           style={{ background: 'var(--radial-glow)' }}
           aria-hidden="true"
         />
         <div className="container-custom relative z-10">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border/60 dark:border-white/10 bg-secondary/50 dark:bg-white/5 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground dark:text-white/60 backdrop-blur-md">
-              <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/40 dark:bg-white/40" aria-hidden="true" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/50 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground backdrop-blur-md dark:border-white/10 dark:bg-white/5 dark:text-white/60">
+              <span
+                className="h-1.5 w-1.5 rounded-full bg-muted-foreground/40 dark:bg-white/40"
+                aria-hidden="true"
+              />
               Beyond Academics
             </span>
             <h1 className="mt-5 text-4xl font-bold tracking-tight text-foreground md:text-5xl lg:text-6xl">
               Co-Curricular Activities
             </h1>
             <p className="mt-5 text-base text-muted-foreground md:text-lg">
-              At {SCHOOL_INFO.name}, we believe in nurturing well-rounded
-              individuals. Our diverse co-curricular activities help students
-              discover their passions and develop essential life skills.
+              At {SCHOOL_INFO.name}, we believe in nurturing well-rounded individuals. Our diverse
+              co-curricular activities help students discover their passions and develop essential
+              life skills.
             </p>
           </div>
         </div>
@@ -114,23 +125,37 @@ export default function CoCurricularPage() {
               const Icon = activity.icon;
               const isReversed = index % 2 === 1;
               const accents = [
-                { bg: 'bg-emerald-500/10', text: 'text-emerald-400', badge: 'bg-emerald-500/5 text-emerald-400 border border-emerald-500/10' },
-                { bg: 'bg-sky-500/10', text: 'text-sky-400', badge: 'bg-sky-500/5 text-sky-400 border border-sky-500/10' },
-                { bg: 'bg-violet-500/10', text: 'text-violet-400', badge: 'bg-violet-500/5 text-violet-400 border border-violet-500/10' },
-                { bg: 'bg-amber-500/10', text: 'text-amber-400', badge: 'bg-amber-500/5 text-amber-400 border border-amber-500/10' },
-                { bg: 'bg-rose-500/10', text: 'text-rose-400', badge: 'bg-rose-500/5 text-rose-400 border border-rose-500/10' },
+                {
+                  bg: 'bg-emerald-500/10',
+                  text: 'text-emerald-400',
+                  badge: 'bg-emerald-500/5 text-emerald-400 border border-emerald-500/10',
+                },
+                {
+                  bg: 'bg-sky-500/10',
+                  text: 'text-sky-400',
+                  badge: 'bg-sky-500/5 text-sky-400 border border-sky-500/10',
+                },
+                {
+                  bg: 'bg-violet-500/10',
+                  text: 'text-violet-400',
+                  badge: 'bg-violet-500/5 text-violet-400 border border-violet-500/10',
+                },
+                {
+                  bg: 'bg-amber-500/10',
+                  text: 'text-amber-400',
+                  badge: 'bg-amber-500/5 text-amber-400 border border-amber-500/10',
+                },
+                {
+                  bg: 'bg-rose-500/10',
+                  text: 'text-rose-400',
+                  badge: 'bg-rose-500/5 text-rose-400 border border-rose-500/10',
+                },
               ];
               const a = accents[index % accents.length];
 
               return (
-                <div
-                  key={activity.id}
-                  id={activity.id}
-                  className="scroll-mt-24"
-                >
-                  <div
-                    className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-12`}
-                  >
+                <div key={activity.id} id={activity.id} className="scroll-mt-24">
+                  <div className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-12`}>
                     {/* Image */}
                     <div className={isReversed ? 'lg:order-2' : ''}>
                       <div className="relative aspect-video overflow-hidden rounded-2xl">
@@ -140,15 +165,15 @@ export default function CoCurricularPage() {
 
                     {/* Content */}
                     <div className={isReversed ? 'lg:order-1' : ''}>
-                      <div className={`mb-4 flex h-14 w-14 items-center justify-center rounded-xl ${a.bg} ${a.text}`}>
+                      <div
+                        className={`mb-4 flex h-14 w-14 items-center justify-center rounded-xl ${a.bg} ${a.text}`}
+                      >
                         <Icon className="h-7 w-7" aria-hidden="true" />
                       </div>
                       <h2 className="mb-4 text-heading-lg font-bold text-foreground">
                         {activity.title}
                       </h2>
-                      <p className="mb-6 text-muted-foreground">
-                        {activity.description}
-                      </p>
+                      <p className="mb-6 text-muted-foreground">{activity.description}</p>
                       <div className="flex flex-wrap gap-2">
                         {activity.items.map((item) => (
                           <span
@@ -195,9 +220,7 @@ export default function CoCurricularPage() {
                   <PremiumGradientPlaceholder icon={Camera} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
                   <div className="absolute inset-0 flex items-end p-4">
-                    <p className="text-sm font-semibold text-white tracking-wide">
-                      {image.alt}
-                    </p>
+                    <p className="text-sm font-semibold tracking-wide text-white">{image.alt}</p>
                   </div>
                 </div>
               </div>
@@ -207,19 +230,25 @@ export default function CoCurricularPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative overflow-hidden bg-purple-50/30 dark:bg-zinc-950 border-t border-purple-200/20 dark:border-white/5 py-16 md:py-24 transition-colors duration-300">
+      <section className="relative overflow-hidden border-t border-purple-200/20 bg-purple-50/30 py-16 transition-colors duration-300 dark:border-white/5 dark:bg-zinc-950 md:py-24">
         <div className="theme-grid-overlay" aria-hidden="true" />
         <div className="container-custom relative z-10 text-center">
-          <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">Beyond Academics</p>
+          <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+            Beyond Academics
+          </p>
           <h2 className="mt-3 text-2xl font-bold text-foreground md:text-4xl">
             Join Our Vibrant Community
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Give your child the opportunity to explore their interests and
-            talents through our comprehensive co-curricular program.
+            Give your child the opportunity to explore their interests and talents through our
+            comprehensive co-curricular program.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:opacity-90 shadow-md font-medium border-0">
+            <Button
+              asChild
+              size="lg"
+              className="border-0 bg-primary font-medium text-primary-foreground shadow-md hover:opacity-90"
+            >
               <Link href="/admission/form">Apply Now</Link>
             </Button>
             <Button asChild size="lg" variant="outline">

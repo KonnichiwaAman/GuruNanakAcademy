@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 import { SCHOOL_INFO } from '@/lib/constants';
 
 // Default coordinates from school info
-const DEFAULT_CENTER: [number, number] = [
-  SCHOOL_INFO.coordinates.lat,
-  SCHOOL_INFO.coordinates.lng,
-];
+const DEFAULT_CENTER: [number, number] = [SCHOOL_INFO.coordinates.lat, SCHOOL_INFO.coordinates.lng];
+const subscribeToHydration = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 export interface MapProps {
   center?: [number, number];
@@ -23,11 +23,7 @@ export function Map({
   markerTitle = SCHOOL_INFO.name,
   className = '',
 }: MapProps) {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const isClient = useSyncExternalStore(subscribeToHydration, getClientSnapshot, getServerSnapshot);
 
   const [lat, lng] = center;
   // Construct google maps embed URL using coordinates
@@ -36,7 +32,7 @@ export function Map({
   if (!isClient) {
     return (
       <div
-        className={`${className} relative z-0 w-full h-full min-h-[300px] bg-muted animate-pulse rounded-2xl flex items-center justify-center`}
+        className={`${className} relative z-0 flex h-full min-h-[300px] w-full animate-pulse items-center justify-center rounded-2xl bg-muted`}
         role="application"
         aria-label={`Map showing location of ${markerTitle}`}
       >
@@ -47,7 +43,7 @@ export function Map({
 
   return (
     <div
-      className={`${className} relative z-0 w-full h-full min-h-[300px] overflow-hidden rounded-2xl border border-border`}
+      className={`${className} relative z-0 h-full min-h-[300px] w-full overflow-hidden rounded-2xl border border-border`}
       role="application"
       aria-label={`Map showing location of ${markerTitle}`}
     >
@@ -57,7 +53,7 @@ export function Map({
         width="100%"
         height="100%"
         style={{ border: 0 }}
-        className="w-full h-full min-h-[300px] transition-all duration-300 dark:invert-[90%] dark:grayscale-[30%] dark:contrast-[100%] dark:hue-rotate-[180deg]"
+        className="h-full min-h-[300px] w-full transition-all duration-300 dark:contrast-[100%] dark:grayscale-[30%] dark:hue-rotate-[180deg] dark:invert-[90%]"
         allowFullScreen={true}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
@@ -84,7 +80,7 @@ export function StaticMapFallback({
 
   return (
     <div
-      className={`${className} relative z-0 w-full h-full min-h-[300px] overflow-hidden rounded-2xl border border-border`}
+      className={`${className} relative z-0 h-full min-h-[300px] w-full overflow-hidden rounded-2xl border border-border`}
     >
       <iframe
         src={embedUrl}
@@ -92,7 +88,7 @@ export function StaticMapFallback({
         width="100%"
         height="100%"
         style={{ border: 0 }}
-        className="w-full h-full min-h-[300px] transition-all duration-300 dark:invert-[90%] dark:grayscale-[30%] dark:contrast-[100%] dark:hue-rotate-[180deg]"
+        className="h-full min-h-[300px] w-full transition-all duration-300 dark:contrast-[100%] dark:grayscale-[30%] dark:hue-rotate-[180deg] dark:invert-[90%]"
         allowFullScreen={true}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
