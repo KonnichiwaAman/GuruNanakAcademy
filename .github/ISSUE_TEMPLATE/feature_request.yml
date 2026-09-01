@@ -1,0 +1,15 @@
+name: Feature Request
+description: Propose a content or UI enhancement
+labels: ["enhancement", "needs-discussion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Propose a new feature, section, or update for the website.
+  - type: textarea
+    id: description
+    attributes:
+      label: Proposal
+      description: Describe the requested improvement or feature.
+    validations:
+      required: true

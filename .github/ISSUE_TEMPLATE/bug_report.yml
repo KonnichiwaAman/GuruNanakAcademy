@@ -1,0 +1,22 @@
+name: Bug Report
+description: Report an issue on the Guru Nanak Academy website
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a website bug.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Description
+      description: Describe what happened and what was expected.
+    validations:
+      required: true
+  - type: textarea
+    id: page
+    attributes:
+      label: Affected Page / Route
+      description: URL or route where the bug was observed (e.g. `/admissions`, `/contact`).
+    validations:
+      required: true

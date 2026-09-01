@@ -51,6 +51,12 @@ Use `.env.example` as the reference for local configuration. Keep service creden
 
 The repository includes Netlify configuration and Next.js sitemap generation. Verify the active provider settings before changing branches, deployment configuration, or domain settings.
 
+## Contributing and Guidelines
+
+- [Contributing Guide](CONTRIBUTING.md)
+- [Security Policy](SECURITY.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+
 ## License
 
 This project is proprietary. See [LICENSE](LICENSE) for the current terms.

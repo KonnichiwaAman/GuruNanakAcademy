@@ -1,4 +1,5 @@
 .agents/
+.github/
 node_modules/
 .next/
 coverage/
