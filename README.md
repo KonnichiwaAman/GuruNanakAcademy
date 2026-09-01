@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/assets/social-preview.png" alt="Guru Nanak Academy: Learning. Character. Community." width="100%">
+
 # Guru Nanak Academy
 
 **Official institutional web platform and digital portal for Guru Nanak Academy.**
